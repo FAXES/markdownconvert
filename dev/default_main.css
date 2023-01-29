@@ -1,0 +1,81 @@
+* {
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+.mdhttpRequest {
+    border: #d4d4d4 solid 1px;
+    width: 80%;
+    padding: 1em;
+    font: inherit;
+}
+
+.mdhttpRequest > h3 {
+    padding-left: 1em;
+    font-size: 1em;
+}
+
+.mdhttpRequest > pre {
+    background-color: #f5f7f9;
+    margin-left: 1em;
+    border-radius: 8px;
+    padding: 1em;
+}
+
+.mdhttpRequest > p > :nth-child(1) {
+    color: #FFFFFF;
+    font-size: small;
+    padding: 0.45em;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.mdhttpRequest .mdhttpRed {
+    background-color: #d33d3d;
+}
+
+.mdhttpRequest .mdhttpOrange {
+    background-color: #b95e04;
+}
+
+.mdhttpRequest .mdhttpBlue {
+    background-color: #346ddb;
+}
+
+.mdhttpRequest .mdhttpGreen {
+    background-color: #008847;
+}
+
+
+.mdhttpRequest .mdhttpEndpoint {
+    color: #121212;
+    font-size: small;
+    padding-left: 1em;
+}
+
+.mdhttpRequest .mdhttpDesc {
+    padding-left: 1em;
+    font-size: 1em;
+}
+
+.mdhttpRequest .mdhttpParam {
+    padding-left: 1em;
+    font-size: 1em;
+    text-align: left;
+    font-weight: normal;
+}
+
+.mdhttpRequest .mdhttpParam td {
+    vertical-align: top;
+    padding-bottom: 1em;
+    padding: 0.45em;
+}
+
+.mdhttpRequest .mdhttpParam code {
+    /* display: block; */
+    background-color: #f5f7f9;
+    border-radius: 8px;
+    padding: 0.45em;
+    margin-right: 2em;
+    font-family: 'Lucida Console', 'Courier New', monospace;
+    height: fit-content;
+}
