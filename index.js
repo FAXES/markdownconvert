@@ -44,8 +44,12 @@ function updateStyle(index, property) {
 
 function convert(string) {
     for(let i = 0; i < markdownBlock.length; i++) {
-        const func = markdownBlock[i];
-        while (func(string) !== false) {
+        const func = markdownBlock[i](string);
+//         const func = markdownBlock[i];
+//         while (func(string) !== false) {
+//             string = func(string);
+//         }
+        while (func !== false) {
             string = func(string);
         }
     }
