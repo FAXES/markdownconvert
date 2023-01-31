@@ -6,7 +6,7 @@
 
 Markdown convert is a conversion tool used to, you guessed it, convert markdown to HTML.
 
-- 🐈 parser Marker parser
+- 🐈 Markdown to HTML parser 
 - ⚡Built different, for performance
 - ⚖️ light-weight while also having custom markdown conversions built-in
 - ♾️ Works in browsers, clients, servers, and (soon) command line interfaces (CLI)
