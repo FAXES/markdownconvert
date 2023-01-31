@@ -1,6 +1,5 @@
 let markdownBlock = [];
 let markdownInline = [];
-
 const fs = require('fs');
 function registerBlock(fun) {
     markdownBlock.push(fun);
@@ -44,12 +43,8 @@ function updateStyle(index, property) {
 
 function convert(string) {
     for(let i = 0; i < markdownBlock.length; i++) {
-        const func = markdownBlock[i](string);
-//         const func = markdownBlock[i];
-//         while (func(string) !== false) {
-//             string = func(string);
-//         }
-        while (func !== false) {
+        const func = markdownBlock[i];
+        while (func(string) !== false) {
             string = func(string);
         }
     }
@@ -60,6 +55,12 @@ function convert(string) {
         }
     }
     string = string.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    let lines = string.split('<br>');
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if(line.length > 0 && !line.startsWith('<')) lines[i] = `<p${getStyle('code') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
+    }
+    string = lines.join('<br>');
     return string;
 }
 
@@ -72,7 +73,8 @@ module.exports = {
     registerBlock,
     registerInline,
     getStyle,
-    updateStyle
+    updateStyle,
+    render
 }
 
 for (let i = 0; i < fs.readdirSync(`${__dirname}/block`).length; i++) {const e = fs.readdirSync(`${__dirname}/block`)[i];require(`./block/${e}`);}

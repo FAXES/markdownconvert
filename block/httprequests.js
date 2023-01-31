@@ -1,9 +1,6 @@
 const main = require('../index.js'), hljs = require('highlight.js');
 
-
 main.registerBlock(function(string) {
-
-
     if(string.indexOf('/POST') !== -1) {
         let pre = '/POST';
         let suf = '/POST';
@@ -25,7 +22,7 @@ main.registerBlock(function(string) {
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
-        let content = `<div ${main.getStyle('httprequest') ? `class="${main.getStyle('httprequest')}"` : null}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -51,7 +48,7 @@ main.registerBlock(function(string) {
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
-        let content = `<div ${main.getStyle('httprequest') ? `class="${main.getStyle('httprequest')}"` : null}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -77,7 +74,7 @@ main.registerBlock(function(string) {
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
-        let content = `<div ${main.getStyle('httprequest') ? `class="${main.getStyle('httprequest')}"` : null}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -103,7 +100,7 @@ main.registerBlock(function(string) {
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
-        let content = `<div ${main.getStyle('httprequest') ? `class="${main.getStyle('httprequest')}"` : null}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -129,10 +126,9 @@ main.registerBlock(function(string) {
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
-        let content = `<div ${main.getStyle('httprequest') ? `class="${main.getStyle('httprequest')}"` : null}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
     }
-    
     return false;
 });

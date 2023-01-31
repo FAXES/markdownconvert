@@ -1,6 +1,31 @@
 {
   "dependencies": {
-    "highlight.js": "^11.7.0",
-    "init": "^0.1.2"
-  }
+    "highlight.js": "^11.7.0"
+  },
+  "name": "markdownconvert",
+  "description": "Markdown Converter (markdownconvert) is a conversion tool to convert Markdown into HTML.",
+  "version": "0.0.2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FAXES/markdownconvert.git"
+  },
+  "keywords": [
+    "markdown",
+    "parser",
+    "commonmark",
+    "md",
+    "converter",
+    "html",
+    "markdownconvert"
+  ],
+  "author": "Weblutions",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FAXES/markdownconvert/issues"
+  },
+  "homepage": "https://github.com/FAXES/markdownconvert#readme"
 }
