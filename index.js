@@ -75,8 +75,5 @@ module.exports = {
     updateStyle
 }
 
-for (let i = 0; i < fs.readdirSync(`${__dirname}/block`).length; i++) {
-const e = fs.readdirSync(`${__dirname}/block`)[i];
-    require(`./block/${e}`);
-}
+for (let i = 0; i < fs.readdirSync(`${__dirname}/block`).length; i++) {const e = fs.readdirSync(`${__dirname}/block`)[i];require(`./block/${e}`);}
 for (let i = 0; i < fs.readdirSync(`${__dirname}/inline`).length; i++) {const e = fs.readdirSync(`${__dirname}/inline`)[i];require(`./inline/${e}`);}
