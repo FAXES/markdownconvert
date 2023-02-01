@@ -59,7 +59,7 @@ updateStyle(string) // Create or overwrite existing style for the defined elemen
 This works in modern broswers and in Node.js [current and LTS versions](https://nodejs.org/en/about/releases/).
 
 ## Authors
-Markdownconvert is created by [Weblutions & FAXES](https://weblutions.com)
+Markdownconvert is created by [Weblutions & FAXES](https://weblutions.com).
 
 <a href="https://discord.gg/faxes" target="_blank">
     <img alt="Discord Invite" src="https://api.weblutions.com/discord/invite/faxes/light">

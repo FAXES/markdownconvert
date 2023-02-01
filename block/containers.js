@@ -2,28 +2,40 @@ const main = require('../index.js');
 
 main.registerBlock(function(string) {
     if(string.indexOf('::: danger') !== -1) {
-        string = string.replace('::: danger', `<div${main.getStyle('contDanger') ? ` class="${main.getStyle('contDanger')}"`: ''}>`);
-        string = string.replace(':::', '</div>');
-        return string;
+        let pre = '::: danger', suf = ':::', css = 'contDanger';
+        let start = string.indexOf(pre);
+        let end = string.indexOf(suf, start + pre.length);
+        let ogText = string.substring(start, end + suf.length);
+        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
+        string = string.replace(ogText, content)
+        return {string: string, start: start, end: end};
     }
-
     if(string.indexOf('::: success') !== -1) {
-        string = string.replace('::: success', `<div${main.getStyle('contSuccess') ? ` class="${main.getStyle('contSuccess')}"`: ''}>`);
-        string = string.replace(':::', '</div>');
-        return string;
+        let pre = '::: success', suf = ':::', css = 'contSuccess';
+        let start = string.indexOf(pre);
+        let end = string.indexOf(suf, start + pre.length);
+        let ogText = string.substring(start, end + suf.length);
+        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
+        string = string.replace(ogText, content)
+        return {string: string, start: start, end: end};
     }
-
     if(string.indexOf('::: info') !== -1) {
-        string = string.replace('::: info', `<div${main.getStyle('contInfo') ? ` class="${main.getStyle('contInfo')}"`: ''}>`);
-        string = string.replace(':::', '</div>');
-        return string;
+        let pre = '::: info', suf = ':::', css = 'contInfo';
+        let start = string.indexOf(pre);
+        let end = string.indexOf(suf, start + pre.length);
+        let ogText = string.substring(start, end + suf.length);
+        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
+        string = string.replace(ogText, content)
+        return {string: string, start: start, end: end};
     }
-
     if(string.indexOf('::: warning') !== -1) {
-        string = string.replace('::: warning', `<div${main.getStyle('contWarning') ? ` class="${main.getStyle('contWarning')}"`: ''}>`);
-        string = string.replace(':::', '</div>');
-        return string;
+        let pre = '::: warning', suf = ':::', css = 'contWarning';
+        let start = string.indexOf(pre);
+        let end = string.indexOf(suf, start + pre.length);
+        let ogText = string.substring(start, end + suf.length);
+        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
+        string = string.replace(ogText, content)
+        return {string: string, start: start, end: end};
     }
-
     return false;
 });

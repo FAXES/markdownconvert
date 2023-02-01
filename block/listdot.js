@@ -1,7 +1,7 @@
 const main = require('../index.js');
 
 main.registerBlock(function(string) {
-    let pre = '\n-';
+    let pre = '\n- ';
     let suf = '\r\n\r\n';
     if(string.indexOf(pre) == -1) return false;
     let start = string.indexOf(pre);
@@ -15,5 +15,5 @@ main.registerBlock(function(string) {
     }
     str += '</ul>';
     string = string.replace(ogText, str);
-    return string;
+    return {string: string, start: start, end: end};
 });

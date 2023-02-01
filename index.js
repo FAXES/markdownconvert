@@ -42,25 +42,39 @@ function updateStyle(index, property) {
 }
 
 function convert(string) {
-    for(let i = 0; i < markdownBlock.length; i++) {
+    let tokens = [];
+    for (let i = 0; i < markdownBlock.length; i++) {
         const func = markdownBlock[i];
         while (func(string) !== false) {
-            string = func(string);
+            let r = func(string);
+            tokens.push([r.start, r.end]);
+            string = r.string;
         }
     }
-    for(let i = 0; i < markdownInline.length; i++) {
-        const func = markdownInline[i];
-        while (func(string) !== false) {
-            string = func(string);
-        }
-    }
+
+
     string = string.replace(/(?:\r\n|\r|\n)/g, '<br>');
     let lines = string.split('<br>');
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
-        if(line.length > 0 && !line.startsWith('<')) lines[i] = `<p${getStyle('p') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
+        let x = string.indexOf(line);
+        const find = tokens.find(e => x >= e[0] && x <= e[1]);
+        if(line.length > 0 && !find) lines[i] = `<p${getStyle('p') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
+
     }
+
+
     string = lines.join('<br>');
+
+
+
+    for(let i = 0; i < markdownInline.length; i++) {
+        const func = markdownInline[i];
+        while (func(string) !== false) {
+            let r = func(string);
+            string = r
+        }
+    }
     return string;
 }
 

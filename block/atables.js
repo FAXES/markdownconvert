@@ -23,7 +23,7 @@ main.registerBlock(function(string) {
     });
 
     string = string.replace(ogText, table.getHTML())
-    return string;
+    return {string: string, start: start, end: end};
 
 
     function isHeaderSeparation(line) {
