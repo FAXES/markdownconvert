@@ -58,7 +58,7 @@ function convert(string) {
     let lines = string.split('<br>');
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
-        if(line.length > 0 && !line.startsWith('<')) lines[i] = `<p${getStyle('code') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
+        if(line.length > 0 && !line.startsWith('<')) lines[i] = `<p${getStyle('p') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
     }
     string = lines.join('<br>');
     return string;
