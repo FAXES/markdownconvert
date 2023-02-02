@@ -45,7 +45,7 @@ main.registerInline(function(string) {
         let start = string.indexOf('#');
         let end = string.indexOf('\n', start + 1);
         let ogHead = string.substring(start, end)
-        let head = string.substring(start, end).replace('#', `<h1 ${main.getStyle('h1') ? `class="${main.getStyle('h1')}"`: ''}>`).replace('\r', '</h1>');
+        let head = string.substring(start, end).replace('#', `<h1${main.getStyle('h1') ? ` class="${main.getStyle('h1')}"`: ''}>`).replace('\r', '</h1>');
         string = string.replace(ogHead, head);
         return string;
     }

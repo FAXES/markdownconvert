@@ -1,9 +1,8 @@
 const main = require('../index.js'), hljs = require('highlight.js');
 
-main.registerInline(function(string) {
+main.registerBlock(function(string) {
     let pre = '```';
     let suf = '```';
-    console.log(string);
     if(string.indexOf(pre) == -1) return false;
     let start = string.indexOf(pre);
     let end = string.indexOf(suf, start + 4);

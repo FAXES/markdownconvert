@@ -50,9 +50,22 @@ render(string) // Another function name, same as convert()
 registerBlock(function) // Registers a block replacement that is executed, good for custom addons
 registerInline(function) // Registers an in-line block replacement. Again, good for custom addons
 
-getStyle(string) // Returns the registered style (class name) for the associated element
-updateStyle(string) // Create or overwrite existing style for the defined element
+getStyle(index) // Returns the registered style (class name) for the associated element
+updateStyle(index, newProperty) // Create or overwrite existing style for the defined element
 ```
+
+## Modifying Styles
+Markdownconvert allows you to change the CSS properties of a tag to allow your own customisation. There's a list of [Default Styles](https://github.com/FAXES/markdownconvert/wiki/Default-Styles) available.
+
+To update a style you can use the `updateStyle()` function.
+```js
+const mdconvert = require('markdownconvert');
+mdconvert.updateStyle('contDanger', 'converterDangerCSS');
+
+// To fetch this property you can use the `getStyle()` function
+mdconvert.getStyle('contDanger');
+```
+*If `contDanger` wasn't found in the list, it would be created and added, perfect for adding your own rules with `registerBlock()` or `registerInline()`.*
 
 ## Combatibility
 
