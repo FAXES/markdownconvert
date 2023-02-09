@@ -15,5 +15,5 @@ main.registerBlock(function(string) {
     str += highlightedCode
     str += '</code></pre>';
     string = string.replace(ogText, str);
-    return {string: string, start: start, end: end};
+    return string;
 });

@@ -8,5 +8,5 @@ main.registerBlock(function(string) {
     let ogText = string.substring(start, end);
     let content = `<blockquote${main.getStyle('quote') ? ` class="${main.getStyle('quote')}"`: ''}>${ogText.replaceAll('>', '')}</blockquote>`;
     string = string.replace(ogText, content)
-    return {string: string, start: start, end: end};
+    return string;
 });

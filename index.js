@@ -42,14 +42,13 @@ function updateStyle(index, property) {
 }
 
 function convert(string) {
-    let tokens = [];
+    // let tokens = [];
     for (let i = 0; i < markdownBlock.length; i++) {
         const func = markdownBlock[i];
         while (func(string) !== false) {
             let r = func(string);
-            tokens.push([r.start, r.end]);
-            string = r.string;
-
+            // tokens.push([r.start, r.end]);
+            string = r;
         }
     }
     for(let i = 0; i < markdownInline.length; i++) {
@@ -61,13 +60,18 @@ function convert(string) {
         }
     }
 
-    string = string.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    string = string.replace(/(?:\r\n|\r\n\r\n|\n\n)/g, '<br>');
     let lines = string.split('<br>');
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         let x = string.indexOf(line);
-        const find = tokens.find(e => x >= e[0] && x <= e[1]);
-        if(line.length > 0 && !find) lines[i] = `<p${getStyle('p') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
+        // const find = tokens.find(e => x >= e[0] && x <= e[1]);
+        if(line.includes('<hr')) continue;
+        if(line.includes('<br')) continue;
+        if(line.includes('<table')) continue;
+        if(line.includes('<img')) continue;
+        if(line.includes('<ol')) continue;
+        if(line.length > 0) lines[i] = `<p${getStyle('p') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
 
         /*
             Changes to be made here;

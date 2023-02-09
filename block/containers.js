@@ -8,7 +8,7 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + suf.length);
         let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
         string = string.replace(ogText, content)
-        return {string: string, start: start, end: end};
+        return string;
     }
     if(string.indexOf('::: success') !== -1) {
         let pre = '::: success', suf = ':::', css = 'contSuccess';
@@ -17,7 +17,7 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + suf.length);
         let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
         string = string.replace(ogText, content)
-        return {string: string, start: start, end: end};
+        return string;
     }
     if(string.indexOf('::: info') !== -1) {
         let pre = '::: info', suf = ':::', css = 'contInfo';
@@ -26,7 +26,7 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + suf.length);
         let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
         string = string.replace(ogText, content)
-        return {string: string, start: start, end: end};
+        return string;
     }
     if(string.indexOf('::: warning') !== -1) {
         let pre = '::: warning', suf = ':::', css = 'contWarning';
@@ -35,7 +35,7 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + suf.length);
         let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
         string = string.replace(ogText, content)
-        return {string: string, start: start, end: end};
+        return string;
     }
     return false;
 });

@@ -15,5 +15,5 @@ main.registerBlock(function(string) {
     }
     str += '</ul>';
     string = string.replace(ogText, str);
-    return {string: string, start: start, end: end};
+    return string;
 });

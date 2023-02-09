@@ -24,7 +24,7 @@ main.registerBlock(function(string) {
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
-        return {string: string, start: start, end: end};
+        return string;
     }
 
     if(string.indexOf('/PATCH') !== -1) {
@@ -50,7 +50,7 @@ main.registerBlock(function(string) {
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
-        return {string: string, start: start, end: end};
+        return string;
     }
 
     if(string.indexOf('/PUT') !== -1) {
@@ -76,7 +76,7 @@ main.registerBlock(function(string) {
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
-        return {string: string, start: start, end: end};
+        return string;
     }
 
     if(string.indexOf('/DELETE') !== -1) {
@@ -102,7 +102,7 @@ main.registerBlock(function(string) {
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
-        return {string: string, start: start, end: end};
+        return string;
     }
 
     if(string.indexOf('/GET') !== -1) {
@@ -128,7 +128,7 @@ main.registerBlock(function(string) {
         let result = string.substring(endParams + 1, string.indexOf(suf, endParams))
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
-        return {string: string, start: start, end: end};
+        return string;
     }
     return false;
 });
