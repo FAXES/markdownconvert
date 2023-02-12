@@ -1,0 +1,393 @@
+
+:root {
+    --pSize: 0.75em;
+    --TextColor: #000000;
+    --contInfo: #0dcaf0; /* LIGHT: 0dcaf0, DARK: */
+    --contSuccess: #2cce82; /* LIGHT: 2cce82, DARK: */
+    --contWarn: #ffc107; /* LIGHT: ffc107, DARK: */
+    --contDanger: #f54354; /* LIGHT: f54354, DARK: */
+    --codeBg: #dcdcdc; /* LIGHT: dcdcdc, DARK: */
+    --codeBorder: #969696; /* LIGHT: 969696, DARK: */
+    --font: 'Montserrat', sans-serif;
+    --httpBg: transparent;  /* LIGHT: transparent, DARK: transparent */
+    --httpBorder: #b6b6b6; /* LIGHT: b6b6b6, DARK: */
+	--hljsString: #66a135; /* LIGHT: 66a135, DARK: 97c075 */
+}
+
+h1 {
+	color: var(--TextColor);
+	font-family: var(--font);
+	font-size: 1.625em;
+	line-height: 1.5;
+	font-weight: 700;
+}
+h2 {
+	color: var(--TextColor);
+	font-family: var(--font);
+	font-size: 1.375em;
+	line-height: 1.5;
+	font-weight: 700;
+}
+h3 {
+	color: var(--TextColor);
+	font-family: var(--font);
+	font-size: 1.125em;
+	line-height: 1.5;
+	font-weight: 700;
+}
+h4 {
+	color: var(--TextColor);
+	font-family: var(--font);
+	font-size: 0.875em;
+	line-height: 1.5;
+	font-weight: 700;
+}
+
+h5 {
+	color: var(--TextColor);
+	font-family: var(--font);
+	font-size: 0.675em;
+	line-height: 1.5;
+	font-weight: 700;
+}
+
+h6 {
+	color: var(--TextColor);
+	font-family: var(--font);
+	font-size: 0.475em;
+	line-height: 1.5;
+	font-weight: 700;
+}
+
+.convertPara {
+	color: var(--TextColor);
+	font-family: var(--font);
+	font-size: var(--pSize);
+	line-height: 1.25;
+	font-weight: 500;
+}
+
+.convertLink {
+	color: var(--TextColor);
+	font-family: var(--font);
+	/* font-size: var(--pSize); */
+	line-height: 1.25;
+	font-weight: 500;
+    text-decoration: none;
+	color: #3FA3EB !important;
+}
+
+.convertLink:hover {
+    color: #3FA3EB !important;
+	text-decoration: underline;
+}
+
+.convertHr {
+	width: 100%;
+	border-top: solid 1px #787878;
+	height: 1px;
+	margin-top: -0.5px;
+}
+
+.convertli {
+	color: var(--TextColor);
+	font-family: var(--font);
+	line-height: 1.25;
+	font-weight: 500;
+	font-size: var(--pSize);
+	list-style-type: disc;
+}
+.convertul {
+	color: var(--TextColor);
+	font-family: var(--font);
+	line-height: 1.25;
+	font-weight: 500;
+}
+.convertul {
+	margin-left: 1.5rem;
+}
+.convertol {
+	color: var(--TextColor);
+	font-family: var(--font);
+	line-height: 1.25;
+	font-weight: 500;
+	list-style-type: decimal;
+}
+.convertol > li {
+	list-style-type: decimal !important;
+}
+.convertol {
+	margin-left: 1.5rem;
+}
+
+.convertTable {
+	color: var(--TextColor);
+	font-family: var(--font);
+	font-size: var(--pSize);
+	line-height: 1.25;
+	font-weight: 500;
+	width: 100%;
+}
+
+.convertTable th {
+	background-color: rgba(196,196,196,0.184);
+}
+
+.convertTable th, .convertTable td {
+	border: solid 1px #C4C4C4;
+	padding: 0.5rem 0.6875rem;
+}
+
+.convertImage {
+	border-radius: 0.125rem;
+	width: 30rem;
+	border-radius: 0.125rem;
+}
+
+.convertQuote {
+	background: #e2e2e2;
+	border-left: 10px solid #afafaf;
+  	margin: 1.5em 10px;
+  	padding: 0.5em 10px;
+	border-radius: 2px;
+}
+
+.convertinfo {
+	background: var(--contInfo);
+	border-radius: 2px;
+	padding: 1em;
+    color: var(--TextColor);
+	font-family: var(--font);
+	font-size: var(--pSize);
+}
+
+.convertinfo a {
+	color: var(--TextColor) !important;
+	text-decoration: underline !important;
+}
+
+.convertinfo a:hover {
+	text-decoration: none !important;
+}
+
+.convertwarning {
+	background: var(--contWarn);
+	border-radius: 2px;
+	padding: 1em;
+    color: var(--TextColor);
+	font-family: var(--font);
+	font-size: var(--pSize);
+}
+
+.convertdanger {
+	background: var(--contDanger);
+	border-radius: 2px;
+	padding: 1em;
+    color: var(--TextColor);
+	font-family: var(--font);
+	font-size: var(--pSize);
+}
+
+.convertsuccess {
+	background: var(--contSuccess);
+	border-radius: 2px;
+	padding: 1em;
+    color: var(--TextColor);
+	font-family: var(--font);
+	font-size: var(--pSize);
+}
+
+pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.hljs {
+	display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: var(--TextColor);
+	font-family: 'Courier Prime', monospace;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: var(--codeBg);
+    border: 1px solid var(--codeBorder);
+    border-radius: 4px;
+}
+
+.hljs-comment,
+.hljs-quote {
+	color: #998;
+	font-style: italic
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+	color: #c36ec1;
+	font-weight: bold
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+	color: #cd9663
+}
+
+.hljs-string,
+.hljs-doctag {
+	color: var(--hljsString)
+}
+
+.hljs-property {
+	color: #dc686d
+}
+
+.hljs-params {
+	color: #dc686d
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+	color: #61a7dc;
+	font-weight: bold;
+}
+
+.hljs-subst {
+	font-weight: normal
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+	color: #458;
+	font-weight: bold
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+	color: #000080;
+	font-weight: normal
+}
+
+.hljs-regexp,
+.hljs-link {
+	color: #009926
+}
+
+.hljs-symbol,
+.hljs-bullet {
+	color: #990073
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+	color: #0086b3
+}
+
+.hljs-meta {
+	color: rgb(165, 50, 180);
+	font-weight: bold
+}
+
+.hljs-deletion {
+	background: #fdd
+}
+
+.hljs-addition {
+	background: #dfd
+}
+
+.hljs-emphasis {
+	font-style: italic
+}
+
+.hljs-strong {
+	font-weight: bold
+}
+
+.mdhttpRequest {
+    border: var(--httpBorder) solid 1px;
+	background-color: var(--httpBg);
+    width: 80%;
+    padding: 1em;
+    font-family: var(--font);
+    color: var(--TextColor);
+}
+
+.mdhttpRequest > h3 {
+    padding-left: 1em;
+    font-size: 0.85em;
+}
+
+.mdhttpRequest > pre {
+    background-color: var(--codeBg);
+    margin-left: 1em;
+    border-radius: 8px;
+	border: var(--codeBorder) solid 1px;
+    padding: 1em;
+	font-family: 'Courier Prime', monospace;
+	font-size: 13px !important;
+}
+
+.mdhttpRequest > pre .convertPara {
+	font-size: 13px !important;
+}
+
+.mdhttpRequest > p > :nth-child(1) {
+    color: #FFFFFF;
+    font-size: small;
+    padding: 0.45em;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.mdhttpRequest .mdhttpRed {
+    background-color: #d33d3d;
+}
+
+.mdhttpRequest .mdhttpOrange {
+    background-color: #b95e04;
+}
+
+.mdhttpRequest .mdhttpBlue {
+    background-color: #346ddb;
+}
+
+.mdhttpRequest .mdhttpGreen {
+    background-color: #008847;
+}
+
+
+.mdhttpRequest .mdhttpEndpoint {
+    color: var(--TextColor);
+    font-size: small;
+    padding-left: 1em;
+}
+
+.mdhttpRequest .mdhttpDesc {
+    padding: 1em 0 0 1em;
+    font-size: var(--pSize);
+}
+
+.mdhttpRequest .mdhttpParam {
+    margin: 0 0 1em 1em;
+    font-size: var(--pSize);
+    text-align: left;
+    font-weight: normal;
+}
+
+.mdhttpRequest .mdhttpParam td {
+    vertical-align: top;
+    padding-bottom: 1em;
+    padding: 0.45em;
+}
