@@ -6,7 +6,8 @@ main.registerBlock(function(string) {
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + pre.length);
         let ogText = string.substring(start, end + suf.length);
-        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
+        let str = `${ogText.replace(`${pre}\r\n`, '').replace(`\r\n${suf}`, '')}`
+        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${str}</div>`;
         string = string.replace(ogText, content)
         return string;
     }
@@ -15,7 +16,8 @@ main.registerBlock(function(string) {
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + pre.length);
         let ogText = string.substring(start, end + suf.length);
-        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
+        let str = `${ogText.replace(`${pre}\r\n`, '').replace(`\r\n${suf}`, '')}`
+        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${str}</div>`;
         string = string.replace(ogText, content)
         return string;
     }
@@ -24,7 +26,8 @@ main.registerBlock(function(string) {
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + pre.length);
         let ogText = string.substring(start, end + suf.length);
-        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
+        let str = `${ogText.replace(`${pre}\r\n`, '').replace(`\r\n${suf}`, '')}`
+        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${str}</div>`;
         string = string.replace(ogText, content)
         return string;
     }
@@ -33,7 +36,8 @@ main.registerBlock(function(string) {
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + pre.length);
         let ogText = string.substring(start, end + suf.length);
-        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${ogText.replace(pre, '').replace(suf, '')}</div>`;
+        let str = `${ogText.replace(`${pre}\r\n`, '').replace(`\r\n${suf}`, '')}`
+        let content = `<div${main.getStyle(css) ? ` class="${main.getStyle(css)}"`: ''}>${str}</div>`;
         string = string.replace(ogText, content)
         return string;
     }

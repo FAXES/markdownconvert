@@ -41,8 +41,52 @@ function updateStyle(index, property) {
     return cssStyles[index];
 }
 
+var getFromBetween = {
+    results:[],
+    string:"",
+    getFromBetween:function (sub1,sub2) {
+        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
+        var SP = this.string.indexOf(sub1)+sub1.length;
+        var string1 = this.string.substr(0,SP);
+        var string2 = this.string.substr(SP);
+        var TP = string1.length + string2.indexOf(sub2);
+        return this.string.substring(SP,TP);
+    },
+    removeFromBetween:function (sub1,sub2) {
+        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
+        var removal = sub1+this.getFromBetween(sub1,sub2)+sub2;
+        this.string = this.string.replace(removal,"");
+    },
+    getAllResults:function (sub1,sub2) {
+        // first check to see if we do have both substrings
+        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
+
+        // find one result
+        var result = this.getFromBetween(sub1,sub2);
+        // push it to the results array
+        this.results.push([this.string.indexOf(sub1), this.string.indexOf(sub2)]);
+        // remove the most recently found one from the string
+        this.removeFromBetween(sub1,sub2);
+
+        // if there's more substrings
+        if(this.string.indexOf(sub1) > -1 && this.string.indexOf(sub2) > -1) {
+            this.getAllResults(sub1,sub2);
+        }
+        else return;
+    },
+    get:function (string,sub1,sub2) {
+        this.results = [];
+        this.string = string;
+        this.getAllResults(sub1,sub2);
+        return this.results;
+    }
+};
+
+
 function convert(string) {
+    string = `\n${string}\n`;
     // let tokens = [];
+
     for (let i = 0; i < markdownBlock.length; i++) {
         const func = markdownBlock[i];
         while (func(string) !== false) {
@@ -53,18 +97,28 @@ function convert(string) {
     }
     for(let i = 0; i < markdownInline.length; i++) {
         const func = markdownInline[i];
+        // var result = getFromBetween.get(str,"<code>","</code>");
+
         while (func(string) !== false) {
             let r = func(string);
-            // console.log(markdownInline[i].toString())
             string = r
         }
     }
+    
 
     string = string.replace(/(?:\r\n|\r\n\r\n|\n\n)/g, '<br>');
+
+    for (let key of Object.keys(module.exports.cache)) {
+        if (string.includes(key)) {
+            string = string.replace(key, module.exports.cache[key]);
+            delete module.exports.cache[key];
+        };
+    };
+
     let lines = string.split('<br>');
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
-        let x = string.indexOf(line);
+        // let x = string.indexOf(line);
         // const find = tokens.find(e => x >= e[0] && x <= e[1]);
         if(line.includes('<hr')) continue;
         if(line.includes('<br')) continue;
@@ -88,15 +142,18 @@ function convert(string) {
     }
     string = lines.join('<br>');
     
-    
 
-    console.log(string);
+
+    // console.log(string);
     return string;
    
 }
 
 function render(string) {
     return convert(string);
+}
+function updateCache(cache) {
+    module.exports.cache = cache;
 }
 
 module.exports = {
@@ -105,7 +162,9 @@ module.exports = {
     registerInline,
     getStyle,
     updateStyle,
-    render
+    render,
+    cache: {},
+    updateCache
 }
 
 for (let i = 0; i < fs.readdirSync(`${__dirname}/block`).length; i++) {const e = fs.readdirSync(`${__dirname}/block`)[i];require(`./block/${e}`);}
