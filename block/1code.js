@@ -12,15 +12,10 @@ main.registerBlock(function(string) {
     const highlightedCode = hljs.highlightAuto(code).value;
 
     let str = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${highlightedCode}</code></pre>`
-    // str += highlightedCode
-    // str += '</code></pre>';
-    // key generator
     let key = crypto.randomUUID();
     str = str.replace('\n', '');
-    // console.log(str.split());
     main.cache[key] = str;
     main.updateCache(main.cache);
     string = string.replace(ogText, key);
-    // string = string.replace(ogText, str);
     return string;
 });
