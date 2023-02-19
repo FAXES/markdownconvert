@@ -43,7 +43,7 @@ function updateStyle(index, property) {
 
 
 function convert(string) {
-    string = `\n${string}\n`;
+    string = `\n${string.replaceAll("\r", "")}\n\n`;
     for (let i = 0; i < markdownBlock.length; i++) {
         const func = markdownBlock[i];
         while (func(string) !== false) {
@@ -58,7 +58,7 @@ function convert(string) {
             string = r
         }
     }
-    string = string.replace(/(?:\r\n|\r\n\r\n|\n\n)/g, '<br>');
+    string = string.replace(/(?:\n\n|\n)/g, '<br>');
     for (let key of Object.keys(module.exports.cache)) {
         if (string.includes(key)) {
             string = string.replace(key, module.exports.cache[key]);
@@ -76,6 +76,7 @@ function convert(string) {
         if(line.length > 0) lines[i] = `<p${getStyle('p') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
     }
     string = lines.join('<br>');
+    string = string.replaceAll('<br><p', '<p').replaceAll('</p><br>', '</p>');
     return string;
    
 }

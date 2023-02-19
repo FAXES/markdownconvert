@@ -21,7 +21,7 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\r\n${suf}`, endParams));
+        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
@@ -47,7 +47,7 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\r\n${suf}`, endParams));
+        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
@@ -73,7 +73,7 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\r\n${suf}`, endParams));
+        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
@@ -99,7 +99,7 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\r\n${suf}`, endParams));
+        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;
@@ -125,7 +125,7 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\r\n${suf}`, endParams));
+        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3><pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre></div>`;
         string = string.replace(ogText, content);
         return string;

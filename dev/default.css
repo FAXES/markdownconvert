@@ -155,7 +155,7 @@ h6 {
 .convertinfo {
 	background: var(--contInfo);
 	border-radius: 2px;
-	padding: 1em;
+	padding: 1.5em;
     color: var(--TextColor);
 	font-family: var(--font);
 	font-size: var(--pSize);
@@ -173,7 +173,7 @@ h6 {
 .convertwarning {
 	background: var(--contWarn);
 	border-radius: 2px;
-	padding: 1em;
+	padding: 1.5em;
     color: var(--TextColor);
 	font-family: var(--font);
 	font-size: var(--pSize);
@@ -182,7 +182,7 @@ h6 {
 .convertdanger {
 	background: var(--contDanger);
 	border-radius: 2px;
-	padding: 1em;
+	padding: 1.5em;
     color: var(--TextColor);
 	font-family: var(--font);
 	font-size: var(--pSize);
@@ -191,7 +191,7 @@ h6 {
 .convertsuccess {
 	background: var(--contSuccess);
 	border-radius: 2px;
-	padding: 1em;
+	padding: 1.5em;
     color: var(--TextColor);
 	font-family: var(--font);
 	font-size: var(--pSize);

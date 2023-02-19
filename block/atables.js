@@ -1,7 +1,7 @@
 const main = require('../index.js');
 
 main.registerBlock(function(string) {
-    let pre = '\r\n|', suf = '\r\n\r\n';
+    let pre = '\n|', suf = '\n\n';
 
     if(string.indexOf(pre) == -1) return false;
     
@@ -9,7 +9,7 @@ main.registerBlock(function(string) {
     let end = string.indexOf(suf, start + 1);
     let ogText = string.substring(start, end + 1);
 
-    var lines = ogText.replace(/\r\n/g,"\n").split("\n");
+    var lines = ogText.split("\n");
     var isHeader = true;
     var table = new HTMLTable();
     lines.forEach(function(line) {
