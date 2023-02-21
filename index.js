@@ -58,6 +58,7 @@ function convert(string) {
             string = r
         }
     }
+
     string = string.replace(/(?:\n\n|\n)/g, '<br>');
     for (let key of Object.keys(module.exports.cache)) {
         if (string.includes(key)) {

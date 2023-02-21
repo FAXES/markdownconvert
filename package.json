@@ -4,7 +4,7 @@
   },
   "name": "markdownconvert",
   "description": "Markdown Converter (markdownconvert) is a conversion tool to convert Markdown into HTML.",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
