@@ -41,7 +41,6 @@ function updateStyle(index, property) {
     return cssStyles[index];
 }
 
-
 function convert(string) {
     string = `\n${string.replaceAll("\r", "")}\n\n`;
     for (let i = 0; i < markdownBlock.length; i++) {

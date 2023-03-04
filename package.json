@@ -1,13 +1,13 @@
 {
-  "dependencies": {
-    "highlight.js": "^11.7.0"
-  },
   "name": "markdownconvert",
   "description": "Markdown Converter (markdownconvert) is a conversion tool to convert Markdown into HTML.",
-  "version": "0.9.4",
+  "version": "0.9.6",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "highlight.js": "^11.7.0"
   },
   "repository": {
     "type": "git",

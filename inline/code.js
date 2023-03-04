@@ -1,4 +1,4 @@
-const main = require('../index.js'), hljs = require('highlight.js');
+const main = require('../index.js');
 
 main.registerInline(function(string) {
     let pre = '`';
