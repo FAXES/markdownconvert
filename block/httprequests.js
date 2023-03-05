@@ -4,7 +4,7 @@ main.registerBlock(function(string) {
     if(string.indexOf('/POST') !== -1) {
         let pre = '/POST';
         let suf = '/POST';
-
+        let resKey = crypto.randomUUID();
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + 5);
         let ogText = string.substring(start, end + 5);
@@ -23,10 +23,10 @@ main.registerBlock(function(string) {
         }
         let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let key = crypto.randomUUID();
-        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre>`
+        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -34,7 +34,7 @@ main.registerBlock(function(string) {
     if(string.indexOf('/PATCH') !== -1) {
         let pre = '/PATCH';
         let suf = '/PATCH';
-
+        let resKey = crypto.randomUUID();
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + 6);
         let ogText = string.substring(start, end + 6);
@@ -53,10 +53,10 @@ main.registerBlock(function(string) {
         }
         let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let key = crypto.randomUUID();
-        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre>`
+        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -64,7 +64,7 @@ main.registerBlock(function(string) {
     if(string.indexOf('/PUT') !== -1) {
         let pre = '/PUT';
         let suf = '/PUT';
-
+        let resKey = crypto.randomUUID();
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + 5);
         let ogText = string.substring(start, end + 5);
@@ -83,10 +83,10 @@ main.registerBlock(function(string) {
         }
         let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let key = crypto.randomUUID();
-        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre>`
+        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -94,7 +94,7 @@ main.registerBlock(function(string) {
     if(string.indexOf('/DELETE') !== -1) {
         let pre = '/DELETE';
         let suf = '/DELETE';
-
+        let resKey = crypto.randomUUID();
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + 7);
         let ogText = string.substring(start, end + 7);
@@ -113,10 +113,10 @@ main.registerBlock(function(string) {
         }
         let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let key = crypto.randomUUID();
-        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre>`
+        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -124,7 +124,7 @@ main.registerBlock(function(string) {
     if(string.indexOf('/GET') !== -1) {
         let pre = '/GET';
         let suf = '/GET';
-
+        let resKey = crypto.randomUUID();
         let start = string.indexOf(pre);
         let end = string.indexOf(suf, start + 5);
         let ogText = string.substring(start, end + 5);
@@ -143,10 +143,10 @@ main.registerBlock(function(string) {
         }
         let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
         let key = crypto.randomUUID();
-        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''}><code>${hljs.highlightAuto(result).value}</code></pre>`
+        let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3>Response:</h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
