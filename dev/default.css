@@ -337,6 +337,7 @@ pre code {
     padding: 1em;
 	font-family: 'Courier Prime', monospace;
 	font-size: 13px !important;
+	display: none;
 }
 
 .mdhttpRequest > pre .convertPara {
