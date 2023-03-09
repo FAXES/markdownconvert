@@ -5,8 +5,9 @@ main.registerInline(function(string) {
     let elements = string.match(/\[.*?\)/g);
     if(elements == null) return false;
     for(el of elements) {
-        let txt = el.match(/\[(.*?)\]/)[1];
-        let url = el.match(/\((.*?)\)/)[1];
+        let txt = el.match(/\[(.*?)\]/)?.[1] || null;
+        let url = el.match(/\((.*?)\)/)?.[1] || null;
+        if(!txt || !url) continue;
         string = string.replace(el, `<a href="${url}"${main.getStyle('link') ? ` class="${main.getStyle('link')}"`: ''} target="_blank">${txt}</a>`);
     }
     return string;
