@@ -76,7 +76,7 @@ function convert(string) {
         if(line.length > 0) lines[i] = `<p${getStyle('p') ? ` class="${getStyle('p')}"`: ''}>${line}</p>`;
     }
     string = lines.join('<br>');
-    string = string.replaceAll('<br><p', '<p').replaceAll('</p><br>', '</p>');
+    string = string.replaceAll('<br><p', '<p').replaceAll('</p><br>', '</p>').replaceAll('[[|-]]', '`');
     return string;
    
 }
