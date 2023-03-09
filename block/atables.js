@@ -27,7 +27,7 @@ main.registerBlock(function(string) {
 
 
     function isHeaderSeparation(line) {
-        let match = line.match(/(\|\s*(:)?\s*-{3,}\s*(:)?\s*)+\|/g);
+        let match = line.match(/(\|\s*(:)?\s*-{2,}\s*(:)?\s*)+\|/g);
         if (!Array.isArray(match)) return false;
         return match.length > 0;
     }
