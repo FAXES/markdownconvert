@@ -1,6 +1,7 @@
 const main = require('../index.js');
 
 main.registerBlock(function(string) {
+    string = string.replaceAll(':::danger', '::: danger').replaceAll(':::success', '::: success').replaceAll(':::info', '::: info').replaceAll(':::warning', '::: warning');
     if(string.indexOf('::: danger') !== -1) {
         let pre = '::: danger', suf = ':::', css = 'contDanger';
         let start = string.indexOf(pre);
