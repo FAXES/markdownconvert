@@ -10,10 +10,11 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + 5);
         let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
         let endEndpoint = string.indexOf(`\n`, start + 4);
-        let description = string.substring(endEndpoint, string.indexOf(`\n-`, string.indexOf(`\n`, start + 4)));
+        let hasParams = ogText.includes(`\n-`);
+        let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
         let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-        let params = string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-');
-        let endParams = string.indexOf(`=`, endDescription);
+        let params = hasParams ? string.substring(endDescription, string.indexOf(`\n=`, endDescription)).split('\n-') : [];
+        let endParams = ogText.indexOf(`\n=`, endDescription);
         let formattedParams = '';
         for(let i = 0; i < params.length; i++) {
             const e = params[i].trim();
@@ -21,12 +22,12 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
+        let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
         let key = crypto.randomUUID();
         let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -40,10 +41,11 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + 6);
         let endpoint = string.substring(start + 6, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
         let endEndpoint = string.indexOf(`\n`, start + 4);
-        let description = string.substring(endEndpoint, string.indexOf(`\n-`, string.indexOf(`\n`, start + 4)));
+        let hasParams = ogText.includes(`\n-`);
+        let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
         let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-        let params = string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-');
-        let endParams = string.indexOf(`=`, endDescription);
+        let params = hasParams ? string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-') : [];
+        let endParams = ogText.indexOf(`=`, endDescription);
         let formattedParams = '';
         for(let i = 0; i < params.length; i++) {
             const e = params[i].trim();
@@ -51,12 +53,12 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
+        let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
         let key = crypto.randomUUID();
         let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -70,10 +72,11 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + 5);
         let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
         let endEndpoint = string.indexOf(`\n`, start + 4);
-        let description = string.substring(endEndpoint, string.indexOf(`\n-`, string.indexOf(`\n`, start + 4)));
+        let hasParams = ogText.includes(`\n-`);
+        let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
         let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-        let params = string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-');
-        let endParams = string.indexOf(`=`, endDescription);
+        let params = hasParams ? string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-') : [];
+        let endParams = ogText.indexOf(`=`, endDescription);
         let formattedParams = '';
         for(let i = 0; i < params.length; i++) {
             const e = params[i].trim();
@@ -81,12 +84,12 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
+        let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
         let key = crypto.randomUUID();
         let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -100,10 +103,11 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + 7);
         let endpoint = string.substring(start + 7, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
         let endEndpoint = string.indexOf(`\n`, start + 4);
-        let description = string.substring(endEndpoint, string.indexOf(`\n-`, string.indexOf(`\n`, start + 4)));
+        let hasParams = ogText.includes(`\n-`);
+        let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
         let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-        let params = string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-');
-        let endParams = string.indexOf(`=`, endDescription);
+        let params = hasParams ? string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-') : [];
+        let endParams = ogText.indexOf(`=`, endDescription);
         let formattedParams = '';
         for(let i = 0; i < params.length; i++) {
             const e = params[i].trim();
@@ -111,12 +115,12 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
+        let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
         let key = crypto.randomUUID();
         let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
@@ -130,10 +134,11 @@ main.registerBlock(function(string) {
         let ogText = string.substring(start, end + 5);
         let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
         let endEndpoint = string.indexOf(`\n`, start + 4);
-        let description = string.substring(endEndpoint, string.indexOf(`\n-`, string.indexOf(`\n`, start + 4)));
+        let hasParams = ogText.includes(`\n-`);
+        let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
         let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-        let params = string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-');
-        let endParams = string.indexOf(`=`, endDescription);
+        let params = hasParams ? string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-') : [];
+        let endParams = ogText.indexOf(`=`, endDescription);
         let formattedParams = '';
         for(let i = 0; i < params.length; i++) {
             const e = params[i].trim();
@@ -141,12 +146,12 @@ main.registerBlock(function(string) {
             let name = e.substring(0, e.indexOf(" "));
             if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
         }
-        let result = string.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams));
+        let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
         let key = crypto.randomUUID();
         let code = `<pre${main.getStyle('code') ? ` class="${main.getStyle('code')}"`: ''} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
         main.cache[key] = code;
         main.updateCache(main.cache);
-        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p><h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table><h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
+        let content = `<div${main.getStyle('httprequest') ? ` class="${main.getStyle('httprequest')}"`: ''}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
         string = string.replace(ogText, content);
         return string;
     }
