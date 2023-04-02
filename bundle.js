@@ -520,7 +520,7 @@ registerInline(function(string) {
     string = string.mdconvertAutoLink();
     let elements = string.match(/\[.*?\)/g);
     if(elements == null) return false;
-    for(el of elements) {
+    for(const el of elements) {
         let txt = el.match(/\[(.*?)\]/)?.[1] || null;
         let url = el.match(/\((.*?)\)/)?.[1] || null;
         if(!txt || !url) continue;
