@@ -39,10 +39,10 @@ main.registerBlock(function(string) {
         this.tds = [];
         this.alignments = [];
         this.getHTML = function() {
-            return `<table${main.getStyle('table') ? ` class="${main.getStyle('table')}"`: ''}>` +
+            return `\n<table${main.getStyle('table') ? ` class="${main.getStyle('table')}"`: ''}>` +
                 this.ths.map((x, index) => { return this.getRow(x, 'th'); }, this).join('') +
                 this.tds.map((x, index) => { return this.getRow(x, 'td'); }, this).join('') +
-                '</table>'
+                '</table>\n'
         };
     
         this.getRow = function(vals, tag) {
