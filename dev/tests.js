@@ -1,7 +1,7 @@
-const mdconvert = require('./index.js');
+const mdconvert = require('../index.js');
 const fs = require('fs');
 
-singleLine = fs.readFileSync('./text.md');
+singleLine = fs.readFileSync('./dev/text.md');
 
 // string = singleLine.toString().split('this');
 
