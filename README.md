@@ -37,9 +37,9 @@ let converted = mdconvert.convert(string);
 
 **Browser**
 ```html
-<script src="https://cdn.jsdelivr.net/npm/markdownconvert/index.min.js"></script>
-<script>
-    document.write(markdownconvert.convert("I **love** HTML don't *you*?"))
+<script type="module">
+    import mdconvert from 'https://cdn.jsdelivr.net/npm/markdownconvert/bundle.min.js';
+    document.write(mdconvert.convert("I **love** HTML don't *you*?"))
 </script>
 ```
 
