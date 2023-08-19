@@ -62,20 +62,20 @@ function convert(string, sanitize = false) {
             }
         }
     }
-    // for(let i = 0; i < markdownInline.length; i++) {
-    //     const inline = markdownInline[i];
-    //     if(inline.open && inline.close) {
-    //         while(findNextMatch(string, inline.open, inline.close, 0) !== -1) {
-    //             let r = inline.exec(string);
-    //             string = r;
-    //         }
-    //     } else {
-    //         while (inline.exec(string) !== -1) {
-    //             let r = inline.exec(string);
-    //             string = r
-    //         }
-    //     }
-    // }
+    for(let i = 0; i < markdownInline.length; i++) {
+        const inline = markdownInline[i];
+        if(inline.open && inline.close) {
+            while(findNextMatch(string, inline.open, inline.close, 0) !== -1) {
+                let r = inline.exec(string);
+                string = r;
+            }
+        } else {
+            while (inline.exec(string) !== -1) {
+                let r = inline.exec(string);
+                string = r
+            }
+        }
+    }
 
     string = string.replace(/(?:\n\n|\n)/g, '<br>');
     for (let key of Object.keys(module.exports.cache)) {
