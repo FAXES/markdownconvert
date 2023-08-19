@@ -1,7 +1,7 @@
 {
   "name": "markdownconvert",
   "description": "Markdown Converter (markdownconvert) is a conversion tool to convert Markdown into HTML.",
-  "version": "0.9.97",
+  "version": "0.9.98",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
