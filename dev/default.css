@@ -6,6 +6,7 @@
     --contSuccess: #00bc8c; /* LIGHT: 2cce82, DARK: 00bc8c */
     --contWarn: #f39c12; /* LIGHT: ffc107, DARK: f39c12 */
     --contDanger: #e74c3c; /* LIGHT: f54354, DARK: e74c3c */
+	--contPrimary:  #969696; /* LIGHT: 969696, DARK: 969696 */
     --codeBg: #1F1F1F; /* LIGHT: dcdcdc, DARK: 1F1F1F */
     --codeBorder: #969696; /* LIGHT: 969696, DARK: 969696 */
     --font: 'Montserrat', sans-serif;
@@ -196,6 +197,15 @@ h6 {
 
 .convertsuccess {
 	background: var(--contSuccess);
+	border-radius: 2px;
+	padding: 1.5em;
+    color: var(--TextColor);
+	font-family: var(--font);
+	font-size: var(--pSize);
+}
+
+.convertprimary {
+	background: var(--contPrimary);
 	border-radius: 2px;
 	padding: 1.5em;
     color: var(--TextColor);
