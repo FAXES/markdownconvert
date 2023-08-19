@@ -30,9 +30,11 @@ let cssStyles = {
     contDanger: "convertdanger",
     contSuccess: "convertsuccess",
     httprequest: "mdhttpRequest",
+    contPrimary: "convertprimary"
 };
 
-function getStyle(index) {
+function getStyle(index, incCSS = false) {
+    if(incCSS) return cssStyles[index] ? ` class="${cssStyles[index]}"` : '';
     return cssStyles[index] || null;
 }
 
@@ -41,22 +43,39 @@ function updateStyle(index, property) {
     return cssStyles[index];
 }
 
-function convert(string) {
+function convert(string, sanitize = false) {
+    if(sanitize) string = string.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
     string = `\n${string.replaceAll("\r", "")}\n\n`;
     for (let i = 0; i < markdownBlock.length; i++) {
-        const func = markdownBlock[i];
-        while (func(string) !== false) {
-            let r = func(string);
-            string = r;
+        const block = markdownBlock[i];
+
+        if(block.open && block.close) {
+            while(findNextMatch(string, block.open, block.close, 0) !== -1) {
+                // console.log(string.split('fgdfgdf'));
+                // let startPosition = findNextMatch(string, block.open, 0);
+                // console.log(startPosition)
+                // let endPosition = findNextMatch(string, block.close, startPosition+block.open);
+                // console.log(endPosition)
+                // if(findNextMatch(string, block.close, startPosition) === -1) break;
+                let r = block.exec(string);
+                string = r;
+            }
         }
     }
-    for(let i = 0; i < markdownInline.length; i++) {
-        const func = markdownInline[i];
-        while (func(string) !== false) {
-            let r = func(string);
-            string = r
-        }
-    }
+    // for(let i = 0; i < markdownInline.length; i++) {
+    //     const inline = markdownInline[i];
+    //     if(inline.open && inline.close) {
+    //         while(findNextMatch(string, inline.open, inline.close, 0) !== -1) {
+    //             let r = inline.exec(string);
+    //             string = r;
+    //         }
+    //     } else {
+    //         while (inline.exec(string) !== -1) {
+    //             let r = inline.exec(string);
+    //             string = r
+    //         }
+    //     }
+    // }
 
     string = string.replace(/(?:\n\n|\n)/g, '<br>');
     for (let key of Object.keys(module.exports.cache)) {
@@ -83,11 +102,31 @@ function convert(string) {
    
 }
 
-function render(string) {
-    return convert(string);
+function render(string, sanitize = false) {
+    return convert(string, sanitize);
 }
 function updateCache(cache) {
     module.exports.cache = cache;
+}
+
+function findNextMatch(string, initial, ending, startPosition) {
+    let initialPosition = string.indexOf(initial, startPosition);
+    if(initialPosition === -1) return -1;
+    if(initialPosition !== -1) {
+        let endingPosition = string.indexOf(ending, initialPosition + initial.length);
+        if(endingPosition === -1) return -1;
+        return endingPosition
+    }
+    
+    return -1;
+
+    // let targetLength = target.length;
+    // for (let i = startPosition; i < string.length; i++) {
+    //     if (string.slice(i, i + targetLength) === target) {
+    //         return i;
+    //     }
+    // }
+    // return -1; // Return -1 if no match is found
 }
 
 module.exports = {
@@ -98,7 +137,8 @@ module.exports = {
     updateStyle,
     render,
     cache: {},
-    updateCache
+    updateCache,
+    findNextMatch
 }
 
 for (let i = 0; i < fs.readdirSync(`${__dirname}/block`).length; i++) {const e = fs.readdirSync(`${__dirname}/block`)[i];require(`./block/${e}`);}

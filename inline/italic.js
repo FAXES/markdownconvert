@@ -1,9 +1,14 @@
 const main = require('../index.js');
 
-main.registerInline(function(string) {
-    let pre = '*', suf = '*';
-    if(string.indexOf(pre) == -1) return false;
-    string = string.replace(pre, '<em>');
-    string = string.replace(suf, '</em>');
+let conf = {
+    open: '*',
+    close: '*'
+}
+function convert(string) {
+    // let pre = '**', suf = '**';
+    // if(string.indexOf(pre) == -1) return false;
+    string = string.replace(conf.open, '<em>');
+    string = string.replace(conf.close, '</em>');
     return string;
-});
+}
+main.registerInline({open: conf.open,close: conf.close,exec: convert});

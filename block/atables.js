@@ -1,12 +1,15 @@
 const main = require('../index.js');
 
-main.registerBlock(function(string) {
-    let pre = '\n|', suf = '\n\n';
+let conf = {
+    open: '\n|',
+    close: '\n\n',
+}
 
-    if(string.indexOf(pre) == -1) return false;
+function convert(string) {
+    if(string.indexOf(conf.open) == -1) return -1;
     
-    let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 1);
+    let start = string.indexOf(conf.open);
+    let end = string.indexOf(conf.close, start + 1);
     let ogText = string.substring(start, end + 1);
 
     var lines = ogText.split("\n");
@@ -39,7 +42,7 @@ main.registerBlock(function(string) {
         this.tds = [];
         this.alignments = [];
         this.getHTML = function() {
-            return `\n<table${main.getStyle('table') ? ` class="${main.getStyle('table')}"`: ''}>` +
+            return `\n<table${main.getStyle('table', true)}>` +
                 this.ths.map((x, index) => { return this.getRow(x, 'th'); }, this).join('') +
                 this.tds.map((x, index) => { return this.getRow(x, 'td'); }, this).join('') +
                 '</table>\n'
@@ -60,4 +63,6 @@ main.registerBlock(function(string) {
             }
         };
     }
-});
+}
+
+main.registerBlock({open: conf.open, close: conf.close,exec: convert});

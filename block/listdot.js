@@ -1,11 +1,16 @@
 const main = require('../index.js');
 
-main.registerBlock(function(string) {
-    let pre = '\n- ';
-    let suf = '\n\n';
-    if(string.indexOf(pre) == -1) return false;
-    let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 4);
+let conf = {
+    open: '\n- ',
+    close: '\n\n',
+}
+
+function convert(string) {
+    // let pre = '\n- ';
+    // let suf = '\n\n';
+    // if(string.indexOf(conf.open) == -1) return false;
+    let start = string.indexOf(conf.open);
+    let end = string.indexOf(conf.close, start + 4);
     let list = string.substring(start, end).split('\n-');
     let ogText = string.substring(start, end);
     let str = `\n<ul${main.getStyle('ul') ? ` class="${main.getStyle('ul')}"`: ''}>`;
@@ -16,6 +21,6 @@ main.registerBlock(function(string) {
     }
     str += '</ul>\n';
     string = string.replace(ogText, str);
-    
     return string;
-});
+}
+main.registerBlock({open: conf.open,close: conf.close,exec: convert});
