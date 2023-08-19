@@ -32,10 +32,10 @@ function post(string) {
     let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
     let endEndpoint = string.indexOf(`\n`, start + 4);
     let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
+    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
     let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n=`, endDescription)).split('\n-') : [];
-    let endParams = ogText.indexOf(`\n=`, endDescription);
+    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
+    let endParams = ogText.indexOf(`\n= `);
     let formattedParams = '';
     for(let i = 0; i < params.length; i++) {
         const e = params[i].trim();
@@ -43,7 +43,7 @@ function post(string) {
         let name = e.substring(0, e.indexOf(" "));
         if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
     }
-    let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
+    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
     let key = crypto.randomUUID();
     let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
     main.cache[key] = code;
@@ -58,15 +58,15 @@ function patch(string) {
     let suf = '/PATCH';
     let resKey = crypto.randomUUID();
     let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 6);
-    let ogText = string.substring(start, end + 6);
-    let endpoint = string.substring(start + 6, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
+    let end = string.indexOf(suf, start + 5);
+    let ogText = string.substring(start, end + 5);
+    let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
     let endEndpoint = string.indexOf(`\n`, start + 4);
     let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
+    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
     let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-') : [];
-    let endParams = ogText.indexOf(`=`, endDescription);
+    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
+    let endParams = ogText.indexOf(`\n= `);
     let formattedParams = '';
     for(let i = 0; i < params.length; i++) {
         const e = params[i].trim();
@@ -74,7 +74,7 @@ function patch(string) {
         let name = e.substring(0, e.indexOf(" "));
         if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
     }
-    let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
+    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
     let key = crypto.randomUUID();
     let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
     main.cache[key] = code;
@@ -94,10 +94,10 @@ function put(string) {
     let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
     let endEndpoint = string.indexOf(`\n`, start + 4);
     let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
+    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
     let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-') : [];
-    let endParams = ogText.indexOf(`=`, endDescription);
+    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
+    let endParams = ogText.indexOf(`\n= `);
     let formattedParams = '';
     for(let i = 0; i < params.length; i++) {
         const e = params[i].trim();
@@ -105,7 +105,7 @@ function put(string) {
         let name = e.substring(0, e.indexOf(" "));
         if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
     }
-    let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
+    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
     let key = crypto.randomUUID();
     let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
     main.cache[key] = code;
@@ -120,15 +120,15 @@ function deleted(string) {
     let suf = '/DELETE';
     let resKey = crypto.randomUUID();
     let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 7);
-    let ogText = string.substring(start, end + 7);
-    let endpoint = string.substring(start + 7, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
+    let end = string.indexOf(suf, start + 5);
+    let ogText = string.substring(start, end + 5);
+    let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
     let endEndpoint = string.indexOf(`\n`, start + 4);
     let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
+    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
     let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-') : [];
-    let endParams = ogText.indexOf(`=`, endDescription);
+    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
+    let endParams = ogText.indexOf(`\n= `);
     let formattedParams = '';
     for(let i = 0; i < params.length; i++) {
         const e = params[i].trim();
@@ -136,7 +136,7 @@ function deleted(string) {
         let name = e.substring(0, e.indexOf(" "));
         if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
     }
-    let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
+    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
     let key = crypto.randomUUID();
     let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
     main.cache[key] = code;
@@ -156,10 +156,10 @@ function get(string) {
     let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
     let endEndpoint = string.indexOf(`\n`, start + 4);
     let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n=', string.indexOf(`\n`, start + 4)));
+    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
     let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`=`, endDescription)).split('\n-') : [];
-    let endParams = ogText.indexOf(`=`, endDescription);
+    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
+    let endParams = ogText.indexOf(`\n= `);
     let formattedParams = '';
     for(let i = 0; i < params.length; i++) {
         const e = params[i].trim();
@@ -167,7 +167,7 @@ function get(string) {
         let name = e.substring(0, e.indexOf(" "));
         if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
     }
-    let result = ogText.substring(endParams + 2, string.indexOf(`\n${suf}`, endParams)).replace(suf, '');
+    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
     let key = crypto.randomUUID();
     let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
     main.cache[key] = code;
