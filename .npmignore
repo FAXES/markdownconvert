@@ -2,4 +2,6 @@
 
 dev/**/*
 
+.github/**/*
+
 package-lock.json
