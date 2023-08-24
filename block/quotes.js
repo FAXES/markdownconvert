@@ -6,8 +6,6 @@ let conf = {
 }
 
 function convert(string) {
-    // let pre = '\n\n>', suf = '\n\n';
-    // if(string.indexOf(pre) == -1) return false;
     let start = string.indexOf(conf.open);
     let end = string.indexOf(conf.close, start + 5);
     let ogText = string.substring(start, end);

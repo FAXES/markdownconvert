@@ -51,12 +51,6 @@ function convert(string, sanitize = false) {
 
         if(block.open && block.close) {
             while(findNextMatch(string, block.open, block.close, 0) !== -1) {
-                // console.log(string.split('fgdfgdf'));
-                // let startPosition = findNextMatch(string, block.open, 0);
-                // console.log(startPosition)
-                // let endPosition = findNextMatch(string, block.close, startPosition+block.open);
-                // console.log(endPosition)
-                // if(findNextMatch(string, block.close, startPosition) === -1) break;
                 let r = block.exec(string);
                 string = r;
             }
@@ -117,16 +111,7 @@ function findNextMatch(string, initial, ending, startPosition) {
         if(endingPosition === -1) return -1;
         return endingPosition
     }
-    
     return -1;
-
-    // let targetLength = target.length;
-    // for (let i = startPosition; i < string.length; i++) {
-    //     if (string.slice(i, i + targetLength) === target) {
-    //         return i;
-    //     }
-    // }
-    // return -1; // Return -1 if no match is found
 }
 
 module.exports = {

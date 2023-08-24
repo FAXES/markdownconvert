@@ -5,8 +5,6 @@ let conf = {
     close: '__'
 }
 function convert(string) {
-    // let pre = '**', suf = '**';
-    // if(string.indexOf(pre) == -1) return false;
     string = string.replace(conf.open, '<u>');
     string = string.replace(conf.close, '</u>');
     return string;

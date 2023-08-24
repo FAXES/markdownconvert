@@ -6,9 +6,6 @@ let conf = {
 }
 
 function convert(string) {
-    // let pre = '\n1. ';
-    // let suf = '\n\n';
-    // if(string.indexOf(conf.open) == -1) return false;
     let start = string.indexOf(conf.open);
     let end = string.indexOf(conf.close, start + 5);
     let list = string.substring(start, end).split('\n');

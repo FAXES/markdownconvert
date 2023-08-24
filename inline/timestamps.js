@@ -5,7 +5,6 @@ let conf = {
     close: '>'
 }
 function convert(string) {
-    // if(string.indexOf(conf.open) == -1) return false;
     let start = string.indexOf(conf.open);
     let end = string.indexOf(conf.close, start + 3);
     let wholething = string.slice(start, end + 1);
