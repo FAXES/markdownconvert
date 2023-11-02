@@ -83,6 +83,9 @@ mdconvert.getStyle('contDanger');
 
 This works in ~~modern broswers and in~~ Node.js [current and LTS versions](https://nodejs.org/en/about/releases/).
 
+## Change-log
+Get allt he latest changes at [github.com/FAXES/markdownconvert/releases](https://github.com/FAXES/markdownconvert/releases)
+
 ## Authors
 Markdownconvert is created by [Weblutions & FAXES](https://weblutions.com).
 
