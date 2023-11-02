@@ -45,7 +45,7 @@ function updateStyle(index, property) {
 
 function convert(string, options = {sanitize: false, plainText: false}) {
     if(options.sanitize) string = string.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-    string = `\n${string.replaceAll("\r", "")}\n\n`;
+    if(!options.plainText) string = `\n${string.replaceAll("\r", "")}\n\n`;
     for (let i = 0; i < markdownBlock.length; i++) {
         const block = markdownBlock[i];
 
