@@ -11,8 +11,7 @@ Markdown convert is a conversion tool used to, you guessed it, convert markdown 
 - ⚖️ light-weight while also having custom markdown conversions built-in
 - ♾️ Works in browsers, clients, servers, and (soon) command line interfaces (CLI)
 - 🔥 Support for [HTTP request blocks](https://docs.weblutions.com/c/products/md-guide-http) to be rendered with custom Markdown
-
-***Planned;** convert Markdown into regular string without Markdown formatting.*
+- 🪴 Remove markdown syntax and get the text content - all without the astricks and underscores
 
 ## Installation
 Get started by running the install command 😊
