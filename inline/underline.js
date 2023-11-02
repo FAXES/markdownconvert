@@ -4,7 +4,8 @@ let conf = {
     open: '__',
     close: '__'
 }
-function convert(string) {
+function convert(string, plain) {
+    if(plain) return string.replaceAll('__', '');
     string = string.replace(conf.open, '<u>');
     string = string.replace(conf.close, '</u>');
     return string;

@@ -1,6 +1,6 @@
 const main = require('../index.js');
 
-function convert(string) {
+function convert(string, plain) {
     let elements = string.match(/!\[(.*?)]\((https?:\/\/\S+\.\w+)\)/gm);
     if(elements == null) return -1;
     for(el of elements) {

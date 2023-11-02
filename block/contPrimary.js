@@ -5,7 +5,8 @@ let conf = {
     close: ':::',
 }
 
-function convert(string) {
+function convert(string, plain) {
+    if(plain) return string.replaceAll(conf.open, '').replaceAll(conf.close, '');
     let start = string.indexOf(conf.open);
     let end = string.indexOf(conf.close, start + conf.open.length);
     let ogText = string.substring(start, end + conf.close.length);

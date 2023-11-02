@@ -22,7 +22,7 @@ let cGet = {
     close: '/GET',
 }
 
-function post(string) {
+function post(string, plain) {
     let pre = '/POST';
     let suf = '/POST';
     let resKey = crypto.randomUUID();
@@ -53,7 +53,7 @@ function post(string) {
     return string;
 }
 
-function patch(string) {
+function patch(string, plain) {
     let pre = '/PATCH';
     let suf = '/PATCH';
     let resKey = crypto.randomUUID();
@@ -84,7 +84,7 @@ function patch(string) {
     return string;
 }
 
-function put(string) {
+function put(string, plain) {
     let pre = '/PUT';
     let suf = '/PUT';
     let resKey = crypto.randomUUID();
@@ -115,7 +115,7 @@ function put(string) {
     return string;
 }
 
-function deleted(string) {
+function deleted(string, plain) {
     let pre = '/DELETE';
     let suf = '/DELETE';
     let resKey = crypto.randomUUID();
@@ -146,7 +146,7 @@ function deleted(string) {
     return string;
 }
 
-function get(string) {
+function get(string, plain) {
     let pre = '/GET';
     let suf = '/GET';
     let resKey = crypto.randomUUID();

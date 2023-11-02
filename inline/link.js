@@ -19,7 +19,7 @@ String.prototype.mdconvertAutoLink = function () {
     });
 };
 
-function convert(string) {
+function convert(string, plain) {
     string = string.mdconvertAutoLink();
     let elements = string.match(/\[.*?\)/g);
     if(elements == null) return -1;

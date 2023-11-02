@@ -5,7 +5,7 @@ let conf = {
     close: '\n\n',
 }
 
-function convert(string) {
+function convert(string, plain) {
     if(string.indexOf(conf.open) == -1) return -1;
     
     let start = string.indexOf(conf.open);

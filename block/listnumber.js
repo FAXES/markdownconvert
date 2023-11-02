@@ -5,7 +5,8 @@ let conf = {
     close: '\n\n',
 }
 
-function convert(string) {
+function convert(string, plain) {
+    if(plain) return string.replaceAll(conf.open, '');
     let start = string.indexOf(conf.open);
     let end = string.indexOf(conf.close, start + 5);
     let list = string.substring(start, end).split('\n');

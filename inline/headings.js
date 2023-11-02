@@ -1,8 +1,9 @@
 const main = require('../index.js');
 
 
-function convert(string) {
+function convert(string, plain) {
     if(string.indexOf('\n######') !== -1) {
+        if(plain) return string.replace('\n######', '');
         let start = string.indexOf('\n######');
         let end = string.indexOf('\n', start + 6);
         let ogHead = string.substring(start, end);
@@ -11,6 +12,7 @@ function convert(string) {
         return string;
     }
     if(string.indexOf('\n#####') !== -1) {
+        if(plain) return string.replace('\n#####', '');
         let start = string.indexOf('\n#####');
         let end = string.indexOf('\n', start + 5);
         let ogHead = string.substring(start, end);
@@ -19,6 +21,7 @@ function convert(string) {
         return string;
     }
     if(string.indexOf('\n####') !== -1) {
+        if(plain) return string.replace('\n####', '');
         let start = string.indexOf('\n####');
         let end = string.indexOf('\n', start + 4);
         let ogHead = string.substring(start, end );
@@ -27,6 +30,7 @@ function convert(string) {
         return string;
     }
     if(string.indexOf('\n###') !== -1) {
+        if(plain) return string.replace('\n###', '');
         let start = string.indexOf('\n###');
         let end = string.indexOf('\n', start + 3);
         let ogHead = string.substring(start, end);
@@ -35,6 +39,7 @@ function convert(string) {
         return string;
     }
     if(string.indexOf('\n##') !== -1) {
+        if(plain) return string.replace('\n##', '');
         let start = string.indexOf('\n##');
         let end = string.indexOf('\n', start + 2);
         let ogHead = string.substring(start, end);
@@ -43,6 +48,7 @@ function convert(string) {
         return string;
     }
     if(string.indexOf('\n#') !== -1) {
+        if(plain) return string.replace('\n#', '');
         let start = string.indexOf('\n#');
         let end = string.indexOf('\n', start + 1);
         let ogHead = string.substring(start, end)

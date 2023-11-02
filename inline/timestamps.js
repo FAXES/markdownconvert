@@ -4,7 +4,8 @@ let conf = {
     open: '<t:',
     close: '>'
 }
-function convert(string) {
+function convert(string, plain) {
+    if(plain) return string.replaceAll(conf.open, '').replaceAll(conf.close, '');
     let start = string.indexOf(conf.open);
     let end = string.indexOf(conf.close, start + 3);
     let wholething = string.slice(start, end + 1);

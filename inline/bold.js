@@ -4,7 +4,8 @@ let conf = {
     open: '**',
     close: '**'
 }
-function convert(string) {
+function convert(string, plain) {
+    if(plain) return string.replaceAll('**', '');
     string = string.replace(conf.open, '<strong>');
     string = string.replace(conf.close, '</strong>');
     return string;
