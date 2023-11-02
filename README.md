@@ -50,14 +50,20 @@ let converted = mdconvert.convert(string);
 
 ## Current Functions
 ```js
-convert(string, sanitize) // Converts Markdown to HTML. sanitize = whether to remove HTML script tags.
-render(string, sanitize) // Another function name, same as convert()
+convert(string, options) // Converts Markdown to HTML.
+render(string, options) // Another function name, same as convert()
 
 registerBlock({open: 'optional', close: 'optional', exec: function}) // Registers a block replacement that is executed, good for custom addons
 registerInline({open: 'optional', close: 'optional', exec: function}) // Registers an in-line block replacement. Again, good for custom addons
 
 getStyle(index, returnClassEquals) // Returns the registered style (class name) for the associated element, returnClassEquals will return the style as ' class="class_name"'.
 updateStyle(index, newProperty) // Create or overwrite existing style for the defined element
+```
+
+## Options
+```js
+options.sanitize // Sanitizes the function, removing any HTML script tags.
+options.plainText // Removes markdown formatting so the plain text is returned without formatting or syntax.
 ```
 
 ## Modifying Styles

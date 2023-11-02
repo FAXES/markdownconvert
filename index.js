@@ -43,15 +43,15 @@ function updateStyle(index, property) {
     return cssStyles[index];
 }
 
-function convert(string, sanitize = false) {
-    if(sanitize) string = string.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+function convert(string, options = {sanitize: false, plainText: false}) {
+    if(options.sanitize) string = string.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
     string = `\n${string.replaceAll("\r", "")}\n\n`;
     for (let i = 0; i < markdownBlock.length; i++) {
         const block = markdownBlock[i];
 
         if(block.open && block.close) {
             while(findNextMatch(string, block.open, block.close, 0) !== -1) {
-                let r = block.exec(string);
+                let r = block.exec(string, options.plainText);
                 string = r;
             }
         }
@@ -60,16 +60,18 @@ function convert(string, sanitize = false) {
         const inline = markdownInline[i];
         if(inline.open && inline.close) {
             while(findNextMatch(string, inline.open, inline.close, 0) !== -1) {
-                let r = inline.exec(string);
+                let r = inline.exec(string, options.plainText);
                 string = r;
             }
         } else {
             while (inline.exec(string) !== -1) {
-                let r = inline.exec(string);
+                let r = inline.exec(string, options.plainText);
                 string = r
             }
         }
     }
+
+    if(options.plainText) return string.replaceAll('\n\n', ' ');
 
     string = string.replace(/(?:\n\n|\n)/g, '<br>');
     for (let key of Object.keys(module.exports.cache)) {
@@ -96,8 +98,8 @@ function convert(string, sanitize = false) {
    
 }
 
-function render(string, sanitize = false) {
-    return convert(string, sanitize);
+function render(string, options = {}) {
+    return convert(string, options);
 }
 function updateCache(cache) {
     module.exports.cache = cache;
