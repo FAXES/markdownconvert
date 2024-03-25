@@ -9,7 +9,6 @@ Markdown convert is a conversion tool used to, you guessed it, convert markdown 
 - 🐈 Markdown to HTML parser 
 - ⚡Built different, for performance
 - ⚖️ light-weight while also having custom markdown conversions built-in
-- ♾️ Works in browsers, clients, servers, and (soon) command line interfaces (CLI)
 - 🔥 Support for [HTTP request blocks](https://docs.weblutions.com/c/products/md-guide-http) to be rendered with custom Markdown
 - 🪴 Remove markdown syntax and get the text content - all without the astricks and underscores
 
@@ -64,6 +63,7 @@ updateStyle(index, newProperty) // Create or overwrite existing style for the de
 options.sanitize // Sanitizes the function, removing any HTML script tags.
 options.plainText // Removes markdown formatting so the plain text is returned without formatting or syntax.
 ```
+Both of these default to `false`.
 
 ## Modifying Styles
 Markdownconvert allows you to change the CSS properties of a tag to allow your own customisation. There's a list of [Default Styles](https://github.com/FAXES/markdownconvert/wiki/Default-Styles) available.
@@ -77,10 +77,6 @@ mdconvert.updateStyle('contDanger', 'converterDangerCSS');
 mdconvert.getStyle('contDanger');
 ```
 *If `contDanger` wasn't found in the list, it would be created and added, perfect for adding your own rules with `registerBlock()` or `registerInline()`.*
-
-## Combatibility
-
-This works in ~~modern broswers and in~~ Node.js [current and LTS versions](https://nodejs.org/en/about/releases/).
 
 ## Change-log
 Get allt he latest changes at [github.com/FAXES/markdownconvert/releases](https://github.com/FAXES/markdownconvert/releases)
