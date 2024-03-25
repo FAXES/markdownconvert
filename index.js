@@ -45,13 +45,11 @@ function updateStyle(index, property) {
 
 function convert(string, options = {sanitize: false, plainText: false}) {
     if(options.sanitize) string = string.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-    if(!options.plainText) string = `${string.replaceAll("\r", "").replaceAll("\n", " ")}`;
+    if(!options.plainText) string = `${string.replaceAll("\r", "")}`;
     for (let i = 0; i < markdownBlock.length; i++) {
         const block = markdownBlock[i];
-        // console.log(block.open)
         if(block.open && block.close) {
             while(findNextMatch(string, block.open, block.close, 0) !== -1) {
-                // console.log(findNextMatch(string, block.open, block.close, 0), string.substring(findNextMatch(string, block.open, block.close, 0), findNextMatch(string, block.open, block.close, 0)+50))
                 let r = block.exec(string, options.plainText);
                 string = r;
             }

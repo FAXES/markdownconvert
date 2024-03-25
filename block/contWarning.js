@@ -10,7 +10,7 @@ function convert(string, plain) {
     let start = string.indexOf(conf.open);
     let end = string.indexOf(conf.close, start + conf.open.length);
     let ogText = string.substring(start, end + conf.close.length);
-    let str = `${ogText.replace(`${conf.open} `, '').replace(` ${conf.close}`, '')}`
+    let str = `${ogText.replace(`${conf.open}`, '').replace(`${conf.close}`, '')}`
     let content = `<div${main.getStyle('contWarning', true)}>${str}</div>`;
     string = string.replace(ogText, content)
     return string;
