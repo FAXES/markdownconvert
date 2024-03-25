@@ -10,6 +10,6 @@ singleLine = fs.readFileSync('./text.md');
 // let htmlBS = mdconvert.convert(singleLine.toString());
 // console.log(htmlBS);
 
-let rendered = mdconvert.convert(singleLine.toString(), {plainText: true});
+let rendered = mdconvert.convert(singleLine.toString(), {plainText: false});
 fs.writeFileSync('./test.html', rendered, 'utf8');
 console.log('Done!');

@@ -48,9 +48,10 @@ function convert(string, options = {sanitize: false, plainText: false}) {
     if(!options.plainText) string = `${string.replaceAll("\r", "").replaceAll("\n", " ")}`;
     for (let i = 0; i < markdownBlock.length; i++) {
         const block = markdownBlock[i];
-
+        // console.log(block.open)
         if(block.open && block.close) {
             while(findNextMatch(string, block.open, block.close, 0) !== -1) {
+                // console.log(findNextMatch(string, block.open, block.close, 0), string.substring(findNextMatch(string, block.open, block.close, 0), findNextMatch(string, block.open, block.close, 0)+50))
                 let r = block.exec(string, options.plainText);
                 string = r;
             }
@@ -70,9 +71,7 @@ function convert(string, options = {sanitize: false, plainText: false}) {
             }
         }
     }
-
-    if(options.plainText) return string.replaceAll('\n\n', ' ');
-
+    if(options.plainText) return string.replaceAll('\n', ' ').replaceAll('\r', '');
     string = string.replace(/(?:\n\n|\n)/g, '<br>');
     for (let key of Object.keys(module.exports.cache)) {
         if (string.includes(key)) {
