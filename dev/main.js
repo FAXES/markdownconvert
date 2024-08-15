@@ -1,7 +1,7 @@
 
 window.onload = (event) => {
     let httpResponses = document.querySelectorAll('[id^="httpReqRes-"]');
-    console.log(httpResponses)
+    // console.log(httpResponses)
     httpResponses.forEach(e => {
       e.onclick = function(){
           let pre = document.getElementById(e.id.replace('httpReqRes-', ''));

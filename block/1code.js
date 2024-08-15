@@ -16,8 +16,7 @@ function convert(string, plain) {
     let str = `<pre${main.getStyle('code', true)}><code>${highlightedCode}</code></pre>`
     let key = crypto.randomUUID();
     str = str.replace('\n', '');
-    main.cache[key] = str;
-    main.updateCache(main.cache);
+    main.updateCache(key, str);
     string = string.replace(ogText, key);
     return string;
 }

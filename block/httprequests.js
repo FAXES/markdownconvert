@@ -22,158 +22,167 @@ let cGet = {
     close: '/GET',
 }
 
-function post(string, plain) {
-    let pre = '/POST';
-    let suf = '/POST';
-    let resKey = crypto.randomUUID();
-    let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 5);
-    let ogText = string.substring(start, end + 5);
-    let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
-    let endEndpoint = string.indexOf(`\n`, start + 4);
-    let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
-    let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
-    let endParams = ogText.indexOf(`\n= `);
-    let formattedParams = '';
-    for(let i = 0; i < params.length; i++) {
-        const e = params[i].trim();
-        let desc = e.substring(e.indexOf(" "));
-        let name = e.substring(0, e.indexOf(" "));
-        if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
+
+function getHttpBlocks(string, blockType) {
+    const blockPattern = new RegExp(`/${blockType}(.*?)\/${blockType}`, 'gs');
+    const blocks = [];
+    let match;
+    while ((match = blockPattern.exec(string)) !== null) {
+        const blockContent = match[1].trim();
+        const [endpointLine, ...rest] = blockContent.split('\n');
+        const endpoint = endpointLine.trim();
+
+        const descriptionEndIndex = rest.findIndex(line => line.startsWith('-') || line.startsWith('= ') || line.match(/^\dxx= /));
+        const description = descriptionEndIndex >= 0 ? rest.slice(0, descriptionEndIndex).join('\n').trim() : '';
+
+        const params = descriptionEndIndex >= 0 && rest[descriptionEndIndex].startsWith('-')
+            ? rest.slice(descriptionEndIndex, rest.findIndex(line => line.startsWith('= ') || line.match(/^\dxx= /))).map(line => line.trim()).filter(line => line)
+            : [];
+        const responseTypes = ['= ', '2xx= ', '3xx= ', '4xx= ', '5xx= '];
+        const responses = responseTypes.reduce((acc, responseType) => {
+            const responseIndex = rest.findIndex(line => line.startsWith(responseType));
+            if (responseIndex >= 0) {
+                const nextResponseIndex = rest.findIndex((line, idx) => idx > responseIndex && responseTypes.some(type => line.startsWith(type)));
+                const responseContent = rest.slice(responseIndex, nextResponseIndex >= 0 ? nextResponseIndex : undefined)
+                    .join('\n')
+                    .replace(new RegExp(`^${responseType}`, 'gm'), '')
+                    .trim();
+                if (responseContent) acc.push({ code: responseType.trim().replace('=', ''), content: responseContent });
+            }
+            return acc;
+        }, []);
+
+        blocks.push({
+            fullMatch: match[0],
+            endpoint,
+            description,
+            params,
+            responses,
+        });
     }
-    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
-    let key = crypto.randomUUID();
-    let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
-    main.cache[key] = code;
-    main.updateCache(main.cache);
-    let content = `<div${main.getStyle('httprequest', true)}><p><span class="mdhttpGreen">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
-    string = string.replace(ogText, content);
-    return string;
+    return blocks;
 }
 
-function patch(string, plain) {
-    let pre = '/PATCH';
-    let suf = '/PATCH';
-    let resKey = crypto.randomUUID();
-    let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 5);
-    let ogText = string.substring(start, end + 5);
-    let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
-    let endEndpoint = string.indexOf(`\n`, start + 4);
-    let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
-    let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
-    let endParams = ogText.indexOf(`\n= `);
-    let formattedParams = '';
-    for(let i = 0; i < params.length; i++) {
-        const e = params[i].trim();
-        let desc = e.substring(e.indexOf(" "));
-        let name = e.substring(0, e.indexOf(" "));
-        if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
-    }
-    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
-    let key = crypto.randomUUID();
-    let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
-    main.cache[key] = code;
-    main.updateCache(main.cache);
-    let content = `<div${main.getStyle('httprequest', true)}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
-    string = string.replace(ogText, content);
+function formatParams(params) {
+    return params.map(param => {
+        const [name, ...descParts] = param.replace(/^- /, '').split(' ');
+        const desc = descParts.join(' ');
+        return `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
+    }).join('');
+}
+
+function get(string, plain) {
+    const blockType = 'GET';
+    const blocks = getHttpBlocks(string, blockType);
+    blocks.forEach(block => {
+        const resKey = crypto.randomUUID();
+        const key = crypto.randomUUID();
+        const formattedResponses = block.responses.map(response => {
+            const codeBlock = `<pre${main.getStyle('code', true)}><code>${hljs.highlightAuto(response.content).value}</code></pre>`;
+            return `${response.code ? `<p class="convertPara">${response.code}:</p>` : ''}${codeBlock}`;
+        }).join('');
+        main.updateCache(key, formattedResponses);
+        const formattedParams = formatParams(block.params);
+        const content = `<div${main.getStyle('httprequest', true)}>
+            <p><span class="mdhttpBlue">${blockType}</span><span class="mdhttpEndpoint"> ${block.endpoint}</span></p>
+            <p class="mdhttpDesc">${block.description}</p>
+            ${block.params.length > 0 ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}
+            ${block.responses.length > 0 ? `<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3> <div id="${resKey}" style="display: none;">${key}</div>` : ''}
+            </div>`;
+        string = string.replace(block.fullMatch, content);
+    });
     return string;
 }
 
 function put(string, plain) {
-    let pre = '/PUT';
-    let suf = '/PUT';
-    let resKey = crypto.randomUUID();
-    let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 5);
-    let ogText = string.substring(start, end + 5);
-    let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
-    let endEndpoint = string.indexOf(`\n`, start + 4);
-    let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
-    let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
-    let endParams = ogText.indexOf(`\n= `);
-    let formattedParams = '';
-    for(let i = 0; i < params.length; i++) {
-        const e = params[i].trim();
-        let desc = e.substring(e.indexOf(" "));
-        let name = e.substring(0, e.indexOf(" "));
-        if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
-    }
-    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
-    let key = crypto.randomUUID();
-    let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
-    main.cache[key] = code;
-    main.updateCache(main.cache);
-    let content = `<div${main.getStyle('httprequest', true)}><p><span class="mdhttpOrange">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
-    string = string.replace(ogText, content);
+    const blockType = 'PUT';
+    const blocks = getHttpBlocks(string, blockType);
+    blocks.forEach(block => {
+        const resKey = crypto.randomUUID();
+        const key = crypto.randomUUID();
+        const formattedResponses = block.responses.map(response => {
+            const codeBlock = `<pre${main.getStyle('code', true)}><code>${hljs.highlightAuto(response.content).value}</code></pre>`;
+            return `${response.code ? `<p class="convertPara">${response.code}:</p>` : ''}${codeBlock}`;
+        }).join('');
+        main.updateCache(key, formattedResponses);
+        const formattedParams = formatParams(block.params);
+        const content = `<div${main.getStyle('httprequest', true)}>
+            <p><span class="mdhttpOrange">${blockType}</span><span class="mdhttpEndpoint"> ${block.endpoint}</span></p>
+            <p class="mdhttpDesc">${block.description}</p>
+            ${block.params.length > 0 ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}
+            ${block.responses.length > 0 ? `<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3> <div id="${resKey}" style="display: none;">${key}</div>` : ''}
+            </div>`;
+        string = string.replace(block.fullMatch, content);
+    });
+    return string;
+}
+
+function patch(string, plain) {
+    const blockType = 'PATCH';
+    const blocks = getHttpBlocks(string, blockType);
+    blocks.forEach(block => {
+        const resKey = crypto.randomUUID();
+        const key = crypto.randomUUID();
+        const formattedResponses = block.responses.map(response => {
+            const codeBlock = `<pre${main.getStyle('code', true)}><code>${hljs.highlightAuto(response.content).value}</code></pre>`;
+            return `${response.code ? `<p class="convertPara">${response.code}:</p>` : ''}${codeBlock}`;
+        }).join('');
+        main.updateCache(key, formattedResponses);
+        const formattedParams = formatParams(block.params);
+        const content = `<div${main.getStyle('httprequest', true)}>
+            <p><span class="mdhttpOrange">${blockType}</span><span class="mdhttpEndpoint"> ${block.endpoint}</span></p>
+            <p class="mdhttpDesc">${block.description}</p>
+            ${block.params.length > 0 ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}
+            ${block.responses.length > 0 ? `<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3> <div id="${resKey}" style="display: none;">${key}</div>` : ''}
+            </div>`;
+        string = string.replace(block.fullMatch, content);
+    });
+    return string;
+}
+
+function post(string, plain) {
+    const blockType = 'POST';
+    const blocks = getHttpBlocks(string, blockType);
+    blocks.forEach(block => {
+        const resKey = crypto.randomUUID();
+        const key = crypto.randomUUID();
+        const formattedResponses = block.responses.map(response => {
+            const codeBlock = `<pre${main.getStyle('code', true)}><code>${hljs.highlightAuto(response.content).value}</code></pre>`;
+            return `${response.code ? `<p class="convertPara">${response.code}:</p>` : ''}${codeBlock}`;
+        }).join('');
+        main.updateCache(key, formattedResponses);
+        const formattedParams = formatParams(block.params);
+        const content = `<div${main.getStyle('httprequest', true)}>
+            <p><span class="mdhttpGreen">${blockType}</span><span class="mdhttpEndpoint"> ${block.endpoint}</span></p>
+            <p class="mdhttpDesc">${block.description}</p>
+            ${block.params.length > 0 ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}
+            ${block.responses.length > 0 ? `<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3> <div id="${resKey}" style="display: none;">${key}</div>` : ''}
+            </div>`;
+        string = string.replace(block.fullMatch, content);
+    });
     return string;
 }
 
 function deleted(string, plain) {
-    let pre = '/DELETE';
-    let suf = '/DELETE';
-    let resKey = crypto.randomUUID();
-    let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 5);
-    let ogText = string.substring(start, end + 5);
-    let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
-    let endEndpoint = string.indexOf(`\n`, start + 4);
-    let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
-    let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
-    let endParams = ogText.indexOf(`\n= `);
-    let formattedParams = '';
-    for(let i = 0; i < params.length; i++) {
-        const e = params[i].trim();
-        let desc = e.substring(e.indexOf(" "));
-        let name = e.substring(0, e.indexOf(" "));
-        if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
-    }
-    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
-    let key = crypto.randomUUID();
-    let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
-    main.cache[key] = code;
-    main.updateCache(main.cache);
-    let content = `<div${main.getStyle('httprequest', true)}><p><span class="mdhttpRed">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
-    string = string.replace(ogText, content);
-    return string;
-}
-
-function get(string, plain) {
-    let pre = '/GET';
-    let suf = '/GET';
-    let resKey = crypto.randomUUID();
-    let start = string.indexOf(pre);
-    let end = string.indexOf(suf, start + 5);
-    let ogText = string.substring(start, end + 5);
-    let endpoint = string.substring(start + 5, string.indexOf(`\n`, start + 4)).replaceAll("\n", "");
-    let endEndpoint = string.indexOf(`\n`, start + 4);
-    let hasParams = ogText.includes(`\n-`);
-    let description = string.substring(endEndpoint, string.indexOf(hasParams ? `\n-` : '\n= ', string.indexOf(`\n`, start + 4)));
-    let endDescription = string.indexOf(`\n-`, string.indexOf(`\n`, start + 4));
-    let params = hasParams ? string.substring(endDescription, string.indexOf(`\n= `)).split('\n-') : [];
-    let endParams = ogText.indexOf(`\n= `);
-    let formattedParams = '';
-    for(let i = 0; i < params.length; i++) {
-        const e = params[i].trim();
-        let desc = e.substring(e.indexOf(" "));
-        let name = e.substring(0, e.indexOf(" "));
-        if(e.length > 3) formattedParams += `<tr><td><code>${name}</code></td><td>${desc}</td></tr>`;
-    }
-    let result = ogText.substring(endParams+3, string.indexOf(`\n${suf}`, endParams)).replace('\n'+suf, '');
-    let key = crypto.randomUUID();
-    let code = `<pre${main.getStyle('code', true)} id="${resKey}"><code>${hljs.highlightAuto(result).value}</code></pre>`
-    main.cache[key] = code;
-    main.updateCache(main.cache);
-    let content = `<div${main.getStyle('httprequest', true)}><p><span class="mdhttpBlue">${pre.replace("/", "")}</span><span class="mdhttpEndpoint"> ${endpoint}</span></p><p class="mdhttpDesc">${description}</p>${hasParams ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3>${key}</div>`;
-    string = string.replace(ogText, content);
+    const blockType = 'DELETE';
+    const blocks = getHttpBlocks(string, blockType);
+    blocks.forEach(block => {
+        const resKey = crypto.randomUUID();
+        const key = crypto.randomUUID();
+        const formattedResponses = block.responses.map(response => {
+            const codeBlock = `<pre${main.getStyle('code', true)}><code>${hljs.highlightAuto(response.content).value}</code></pre>`;
+            return `${response.code ? `<p class="convertPara">${response.code}:</p>` : ''}${codeBlock}`;
+        }).join('');
+        main.updateCache(key, formattedResponses);
+        const formattedParams = formatParams(block.params);
+        const content = `<div${main.getStyle('httprequest', true)}>
+            <p><span class="mdhttpRed">${blockType}</span><span class="mdhttpEndpoint"> ${block.endpoint}</span></p>
+            <p class="mdhttpDesc">${block.description}</p>
+            ${block.params.length > 0 ? `<h3>Parameters:</h3><table class="mdhttpParam">${formattedParams}</table>` : ''}
+            ${block.responses.length > 0 ? `<h3 id="httpReqRes-${resKey}">Response: <sup>[Expand]</sup></h3> <div id="${resKey}" style="display: none;">${key}</div>` : ''}
+            </div>`;
+        string = string.replace(block.fullMatch, content);
+    });
     return string;
 }
 
