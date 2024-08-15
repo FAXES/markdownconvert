@@ -72,7 +72,7 @@ function convert(string, options = {sanitize: false, plainText: false}) {
     if(options.plainText) return string.replaceAll('\n', ' ').replaceAll('\r', '');
     string = string.replace(/(?:\n\n|\n)/g, '<br>');
     for (let key of Object.keys(module.exports.cache)) {
-        if (string.includes(key)) {
+        if(string.includes(key)) {
             string = string.replace(key, module.exports.cache[key]);
             delete module.exports.cache[key];
         };
@@ -98,8 +98,9 @@ function convert(string, options = {sanitize: false, plainText: false}) {
 function render(string, options = {}) {
     return convert(string, options);
 }
-function updateCache(cache) {
-    module.exports.cache = cache;
+
+function updateCache(key, content) {
+    module.exports.cache[key] = content;
 }
 
 function findNextMatch(string, initial, ending, startPosition) {
