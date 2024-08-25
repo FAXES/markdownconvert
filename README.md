@@ -7,10 +7,10 @@
 Markdown convert is a conversion tool used to, you guessed it, convert markdown to HTML.
 
 - 🐈 Markdown to HTML parser 
-- ⚡Built different, for performance
+- ⚡Built differently, for performance
 - ⚖️ light-weight while also having custom markdown conversions built-in
 - 🔥 Support for [HTTP request blocks](https://docs.weblutions.com/c/products/md-guide-http) to be rendered with custom Markdown
-- 🪴 Remove markdown syntax and get the text content - all without the astricks and underscores
+- 🪴 Remove markdown syntax and get the text content - all without the asterisks and underscores
 
 ## Installation
 Get started by running the install command 😊
@@ -19,7 +19,7 @@ npm install markdownconvert
 ```
 
 ## Usage
-Currently you can use markdownconvert in the following ways.
+Currently, you can use markdownconvert in the following ways.
 
 **Node.js**
 ```js
@@ -76,10 +76,10 @@ mdconvert.updateStyle('contDanger', 'converterDangerCSS');
 // To fetch this property you can use the `getStyle()` function
 mdconvert.getStyle('contDanger');
 ```
-*If `contDanger` wasn't found in the list, it would be created and added, perfect for adding your own rules with `registerBlock()` or `registerInline()`.*
+*If `contDanger` wasn't found in the list, it would be created and added, which is perfect for adding your own rules with `registerBlock()` or `registerInline()`.*
 
 ## Change-log
-Get allt he latest changes at [github.com/FAXES/markdownconvert/releases](https://github.com/FAXES/markdownconvert/releases)
+Get all the latest changes at [github.com/FAXES/markdownconvert/releases](https://github.com/FAXES/markdownconvert/releases)
 
 ## Authors
 Markdownconvert is created by [Weblutions & FAXES](https://weblutions.com).
