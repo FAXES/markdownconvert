@@ -11,7 +11,7 @@ function convert(string, plain) {
     let end = string.indexOf(conf.close, start + 4);
     let list = string.substring(start, end).split('\n-');
     let ogText = string.substring(start, end);
-    let str = `\n<ul${main.getStyle('ul') ? ` class="${main.getStyle('ul')}"`: ''}>`;
+    let str = `<ul${main.getStyle('ul') ? ` class="${main.getStyle('ul')}"`: ''}>`;
     for(let i = 0; i < list.length; i++) {
         if(i == 0) continue;
         const e = list[i];
