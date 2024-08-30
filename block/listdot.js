@@ -17,7 +17,7 @@ function convert(string, plain) {
         const e = list[i];
         str += `<li${main.getStyle('list') ? ` class="${main.getStyle('list')}"`: ''}>${i == 0 ? e.replace('\n-', '').replace('-', '') : e}</li>`
     }
-    str += '</ul>\n';
+    str += '</ul>';
     string = string.replace(ogText, str);
     return string;
 }
