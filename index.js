@@ -9,12 +9,12 @@ function registerInline(fun) {
 }
 
 let cssStyles = {
-    h1: null,
-    h2: null,
-    h3: null,
-    h4: null,
-    h5: null,
-    h6: null,
+    h1: "convertH1",
+    h2: "convertH2",
+    h3: "convertH3",
+    h4: "convertH4",
+    h5: "convertH5",
+    h6: "convertH6",
     p: "convertPara",
     hr: "convertHr",
     link: "convertLink",
