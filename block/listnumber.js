@@ -11,13 +11,13 @@ function convert(string, plain) {
     let end = string.indexOf(conf.close, start + 5);
     let list = string.substring(start, end).split('\n');
     let ogText = string.substring(start, end);
-    let str = `\n<ol${main.getStyle('ol') ? ` class="${main.getStyle('ol')}"`: ''}>`;
+    let str = `<ol${main.getStyle('ol') ? ` class="${main.getStyle('ol')}"`: ''}>`;
     for(let i = 0; i < list.length; i++) {
         if(i == 0) continue;
         const e = list[i].replace('\n', '');
         str += `<li${main.getStyle('list') ? ` class="${main.getStyle('list')}"`: ''}>${e.replace(/[0-9]/, '').replace('.', '')}</li>`
     }
-    str += '</ol>\n';
+    str += '</ol>';
     string = string.replace(ogText, str);
     return string;
 };
