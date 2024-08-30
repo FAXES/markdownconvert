@@ -21,28 +21,28 @@
 	--hltitle: #61aeee;  /* LIGHT: b6b6b6, DARK: 61aeee */
 }
 
-h1 {
+.convertH1 {
 	color: var(--TextColor);
 	font-family: var(--font);
 	font-size: 1.625em;
 	line-height: 1.5;
 	font-weight: 700;
 }
-h2 {
+.convertH2 {
 	color: var(--TextColor);
 	font-family: var(--font);
 	font-size: 1.375em;
 	line-height: 1.5;
 	font-weight: 700;
 }
-h3 {
+.convertH3 {
 	color: var(--TextColor);
 	font-family: var(--font);
 	font-size: 1.125em;
 	line-height: 1.5;
 	font-weight: 700;
 }
-h4 {
+.convertH4 {
 	color: var(--TextColor);
 	font-family: var(--font);
 	font-size: 0.875em;
@@ -50,7 +50,7 @@ h4 {
 	font-weight: 700;
 }
 
-h5 {
+.convertH5 {
 	color: var(--TextColor);
 	font-family: var(--font);
 	font-size: 0.675em;
@@ -58,7 +58,7 @@ h5 {
 	font-weight: 700;
 }
 
-h6 {
+.convertH6 {
 	color: var(--TextColor);
 	font-family: var(--font);
 	font-size: 0.475em;
@@ -213,7 +213,7 @@ h6 {
 	font-size: var(--pSize);
 }
 
-pre code {
+.hljs code {
     padding: 0;
     font-size: inherit;
     color: inherit;
@@ -223,7 +223,7 @@ pre code {
 }
 
 .hljs {
-	display: block;
+    display: block;
     padding: 9.5px;
     margin: 0 0 10px;
     font-size: 13px;
