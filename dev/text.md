@@ -2,6 +2,7 @@
 Phil Bot is a Node.Js based website and requires a server (VPS, Dedicated) to operate. Shared hosting doesn't work
 :::
 
+-# Mini heading right here. This is a smaller heading that is grayed out small text.
 As Phil Bot is a Node.Js operating website it requires a little more power than you might be used to with a more common site. This article covers some more specific details on what you need to run Phil Bot.
 
 
@@ -35,3 +36,10 @@ These specs may vary and be higher or lower, depending on things like, file size
 Looking for some swagger in your hosting? Infusion Peak Hosting's got you covered, they're cheap as chips and have great hardware!
 
 <a href="https://infusionpeakhosting.com" target="_blank"><img src="https://cdn.projectphil.co.uk/1155551194337521726/OnKB3X.gif" border="0" alt="" width="740" height="100"/></a>
+
+---
+
+>! Spoiler Heading Here
+This is the spoiler text which displays under it
+It can be multiple lines until there's a break.
+

@@ -66,6 +66,10 @@
 	font-weight: 700;
 }
 
+.convertsmall {
+	color: var(--contPrimary);
+}
+
 .convertPara {
 	color: var(--TextColor);
 	font-family: var(--font);
@@ -376,4 +380,13 @@
     vertical-align: top;
     padding-bottom: 1em;
     padding: 0.45em;
+}
+
+.convertdetails {
+	background-color: #e2e2e2;
+	padding: 1rem;
+}
+
+.convertdetails > summary {
+	font-weight: bold;
 }
