@@ -1,7 +1,7 @@
 const main = require('../index.js');
 
 let conf = {
-    open: '\n\n>',
+    open: '\n\n> ',
     close: '\n\n',
 }
 

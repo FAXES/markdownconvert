@@ -30,7 +30,9 @@ let cssStyles = {
     contDanger: "convertdanger",
     contSuccess: "convertsuccess",
     httprequest: "mdhttpRequest",
-    contPrimary: "convertprimary"
+    contPrimary: "convertprimary",
+    small: "convertsmall",
+    details: "convertdetails"
 };
 
 function getStyle(index, incCSS = false) {

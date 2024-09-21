@@ -56,6 +56,15 @@ function convert(string, plain) {
         string = string.replace(ogHead, head);
         return string;
     }
+    if(string.indexOf('\n-#') !== -1) {
+        if(plain) return string.replace('\n-#', '');
+        let start = string.indexOf('\n-#');
+        let end = string.indexOf('\n', start + 2);
+        let ogHead = string.substring(start, end);
+        let head = `\n<small${main.getStyle('small', true)}>${ogHead.replace('\n-#', '').replace('\n', '')}</small>`;
+        string = string.replace(ogHead, head);
+        return string;
+    }
     return -1;
 };
 
