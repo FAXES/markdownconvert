@@ -9,6 +9,7 @@ on:
 
 jobs:
   publish-npm:
+    if: ${{ github.event.release.prerelease == false }} # Only run for stable releases
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,4 +19,4 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
