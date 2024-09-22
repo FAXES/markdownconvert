@@ -3,7 +3,7 @@ Phil Bot is a Node.Js based website and requires a server (VPS, Dedicated) to op
 :::
 
 -# Mini heading right here. This is a smaller heading that is grayed out small text.
-As Phil Bot is a Node.Js operating website it requires a little more power than you might be used to with a more common site. This article covers some more specific details on what you need to run Phil Bot.
+As Phil Bot is a Node.Js operating website it requires a little more power than you might be used to with a more common site. This article covers some more specific details on what you need to run Phil Bot.^[1]^
 
 
 > All of Phil Bots documentation is created for Ubuntu 20 based Linux servers. Currently we don't offer any Windows guides. It's highly recommended to use a Ubuntu 20 based Linux server for hosting Phil Bot.
